@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<script src = "app.js" defer></script>
+</head>
+<body>
+    <div id="list"></div>
+        <ul id="myUl" >
+            <li>
+                <div class="container" id="container1">
+                    <div class="small-box" id="counter1">
+                        <div class = "balls">1</div>
+                    </div>
+                    <div class="cross1" >
+                        <button id="cross1" onclick="cross_func(1)">&#10006;</button>
+                    </div>
+                    <br><br>
+                        <div class="row">
+                            <div class="column">
+                            <label>Name</label><br>
+                            <input class="name" type="text" id="name1">
+                            </div>
+                            <div class="column">
+                            <label>Email</label><br>
+                            <input class="email" type="email" id="email1">
+                            </div>
+                            <div class="column">
+                            <label>Mobile</label><br>
+                            <input class="mobile" type="number" id="mobile1" pattern="[0-9]{10}" placeholder="9523766809">
+                            </div>
+                            <div class="column">
+                            <label>City</label><br>
+                            <select class="city" name="city" id="city1">
+                                <option value="default">Select</option>
+                                <option value="hyderabad">Hyderabad</option>
+                                <option value="bangalore">Bangalore</option>
+                                <option value="mumbai">Mumbai</option>
+                                <option value="purnea">Purnea</option>
+                                <option value="delhi">Delhi</option>
+                            </select>
+                            </div>
+                        </div>
+        
+                        <div class="row">
+                            <div class="col2">
+                                <label for="gender">Gender : </label>
+                                <label>Male</label><input type="radio" name="gender1"  value="Male" class ="gender">
+                                <label>Female</label><input type="radio" name="gender1" value="female" class="gender">
+                            </div>
+                        </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <p>You can add only max 5 items</p>
+    <div class="row1">
+        <div class="col1">
+            <button id="addbtn" type="submit">Add</button>
+        </div>
+        <div class="col1" >
+            <button id="savebtn" type="submit">Save</button>
+        </div>
+    </div>
+
+
+<br><br>
+<div id="person"></div>
+
+</body>
+</html>

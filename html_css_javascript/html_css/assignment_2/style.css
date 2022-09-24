@@ -1,0 +1,325 @@
+body {
+    margin: 0px;
+    font-family: sans-serif;
+    font-size: 30px;
+}
+
+#body-header {
+    height: 75vh;
+    background-image: url('./images/sara_hero.jpg');
+    background-size: cover;
+    background-position: center;
+    /* background-attachment: fixed; */
+    padding-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+input {
+    padding: 10px;
+    margin-left: 60px;
+    width: 150px;
+    background-color: darkmagenta;
+}
+
+::placeholder{
+    color: white;
+}
+
+span {
+    font-size: 20px;
+}
+
+p {
+    font-size: 20px;
+}
+
+hr {
+    width:10%; 
+    height: 3px; 
+    background-color: yellow; 
+    color: yellow;
+    margin-left: 0px;
+}
+
+.small-txt{
+    font-size: 15px;
+}
+
+.white_text{
+    margin-left: 60px;
+    color: white;
+}
+
+.row {
+    display: flex;
+  }
+
+  .logo {
+    /* background-color: gray; */
+    height: 100px;
+    flex: 25%
+    /* width: 500px; */
+  }
+
+  ul{
+    margin-right: 0px;
+  }
+
+  a{
+    color: white;
+    text-decoration: none;
+  }
+  a:hover {
+    color: lightgrey;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+  }
+
+  .nav-bar {
+    /* background-color: yellow; */
+    height: 50px;
+    flex: 75%;
+    /* width: 1000px; */
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    margin-left: 400px;
+  }
+
+
+  .key {
+    font-size: 5px;
+    font-style: italic;
+  }
+
+  .val {
+    margin-left: 20px;
+  }
+
+  .horizontal-list {
+    list-style: none;
+    margin-top: -20px;
+    margin-right: 200px;
+    margin-bottom: 100px;
+}
+.horizontal-list li {
+    display: inline-block;
+    margin: 0px 10px 8px 10px;
+    font-weight: 50;
+    font-size: 0.9rem;
+}
+.horizontal-list li a {
+    color: white;
+    text-decoration: none;
+}
+.horizontal-list li select {
+    color: white;
+    border-color: transparent;
+    background-color: transparent;
+}
+.nav-menu li a:hover {
+    color: lightgrey;
+    border-bottom: 1px solid black;
+}
+
+  .items {
+    flex : 10%;
+    font-size: large;
+    align-self: center;
+    /* background-color: beige; */
+    margin: 5px;
+  }
+
+  .text-center {
+    text-align: right;
+}
+
+.blog_author {
+    color: white;
+    left: 30px;
+    margin: 10px 10px 10px 10px;
+    align-self: left;
+    margin: 100px;
+}
+
+
+.content1 {
+    padding: 40px;
+    background-color: lightgrey;
+    /* background-color: skyblue; */
+    font-style: italic;
+}
+
+.container2 {
+    /* display: flex; */
+    margin-top: 1px;
+}
+
+.content2 {
+    display: flex;
+    margin-left: 70px;
+}
+
+.text1 {
+    height: 600px;
+    /* width: 900px; */
+    flex: 60%;
+    /* background-color: gray; */
+}
+
+.side_pic{
+    height: 600px;
+    flex: 40%;
+    /* background-color: yellow; */
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.side_pic_1{
+    margin: 10px;
+    flex: 50%;
+    /* background-color: blue; */
+}
+
+.large_pic {
+    margin: 10px 10px 10px 10px;
+    padding: 100px;
+    background-image: url('https://image.shutterstock.com/image-photo/successful-team-group-young-business-260nw-583591807.jpg');
+    background-size: cover;
+    background-position: center;
+    /* background-attachment: fixed; */
+}
+
+.content3 {
+    display: flex;
+}
+
+.text2 {
+    height: 900px;
+    flex: 70%;
+    margin-left: 70px;
+    /* background-color: pink; */
+}
+
+.phrase_pic {
+    height: 600px;
+    flex: 30%;
+    flex-direction: column;
+    /* background-color: orange; */
+    display: flex;
+    margin-left: 10px;
+}
+
+.phrase {
+    height: 200px;
+    flex: 50%;
+    /* background-color: blue; */
+    margin-top: 30px;
+}
+
+.small_pic {
+    height: 300px;
+    flex: 50%;
+    /* background-color: yellow; */
+}
+
+.container3 {
+    padding: 20px;
+    background-color: rgb(42,209,154);
+}
+
+.footer {
+    display: flex;
+    background-color: rgb(58,44,80);
+}
+
+.footer_1 {
+    flex: 25%;
+    /* background-color: blue; */
+    height: 300px;
+}
+
+.footer_2 {
+    /* flex: 1%; */
+    width: 170px;
+    /* background-color: green; */
+    height: 300px;
+}
+.footer_3 {
+    flex: 10%;
+    /* background-color: black; */
+    height: 300px;
+}
+
+.footer_4 {
+    flex: 10%;
+    /* background-color: blue; */
+    height: 300px;
+}
+
+button {
+    padding: 10px;
+    background-color: yellow;
+}
+
+.license {
+    padding: 20px;
+    background-color: rgb(32,23,45);
+    display: flex;
+}
+
+.license-txt {
+    flex: 50%;
+    justify-content: right;
+}
+
+.media_logo {
+    flex:10%;
+    justify-content: right;
+    margin-left: 50px;
+    margin-right: 100px;
+    display: flex;
+    /* background-color: black; */
+}
+
+.fa {
+    padding: 5px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+  }
+  
+  .fa:hover {
+      opacity: 0.7;
+  }
+
+  .fa-facebook {
+    background: #3B5998;
+    color: white;
+  }
+  
+  .fa-twitter {
+    background: #55ACEE;
+    color: white;
+  }
+  
+  .fa-google {
+    background: #dd4b39;
+    color: white;
+  }
+  
+  .fa-linkedin {
+    background: #007bb5;
+    color: white;
+  }
+  
+  .fa-youtube {
+    background: #bb0000;
+    color: white;
+  }
