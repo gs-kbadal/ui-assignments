@@ -20,7 +20,7 @@ input {
     padding: 10px;
     margin-left: 60px;
     width: 150px;
-    background-color: darkmagenta;
+    background-color: #3b3b4f;
 }
 
 ::placeholder{
@@ -147,7 +147,7 @@ hr {
 
 .content1 {
     padding: 40px;
-    background-color: lightgrey;
+    background-color: #efeff6;
     /* background-color: skyblue; */
     font-style: italic;
 }
@@ -228,12 +228,13 @@ hr {
 
 .container3 {
     padding: 20px;
-    background-color: rgb(42,209,154);
+    background-color: #2bbf9f;
 }
 
 .footer {
     display: flex;
-    background-color: rgb(58,44,80);
+    /* background-color: rgb(58,44,80); */
+    background-color:  #48485f; 
 }
 
 .footer_1 {
