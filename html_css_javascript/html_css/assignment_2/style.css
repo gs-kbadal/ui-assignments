@@ -14,6 +14,7 @@ body {
     display: flex;
     flex-direction: column;
     color: white;
+    background-repeat: no-repeat;
 }
 
 input {
@@ -56,10 +57,13 @@ hr {
     display: flex;
   }
 
+
   .logo {
     /* background-color: gray; */
     height: 100px;
-    flex: 25%
+    flex: 25%;
+    /* width: 200px;
+    margin-left: 100px; */
     /* width: 500px; */
   }
 
@@ -78,24 +82,25 @@ hr {
   }
 
   .nav-bar {
-    /* background-color: yellow; */
     height: 50px;
     flex: 75%;
-    /* width: 1000px; */
     text-align: center;
     display: flex;
     flex-direction: row;
     margin-left: 400px;
   }
 
+  .key_value{
+    width: 1000px;
+  }
 
   .key {
-    font-size: 5px;
     font-style: italic;
+    width: 180px;
   }
 
   .val {
-    margin-left: 20px;
+    margin-left: 40px;
   }
 
   .horizontal-list {
@@ -146,10 +151,18 @@ hr {
 
 
 .content1 {
-    padding: 40px;
+    padding: 30px;
+    height: 150px;
     background-color: #efeff6;
     /* background-color: skyblue; */
     font-style: italic;
+}
+.content1_text{
+    /* width: 800px; */
+    align-self: center;
+    margin-bottom: 30px;
+    margin-left: 80px;
+    align-items: center;
 }
 
 .container2 {
