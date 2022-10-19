@@ -17,8 +17,6 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { ListViewComponent } from './list-view/list-view.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { MainPageComponent } from './main-page/main-page.component';
-import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
-import { MockComponentComponent } from './mock-component/mock-component.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 
@@ -33,8 +31,6 @@ registerLocaleData(en);
     ListViewComponent,
     RegistrationFormComponent,
     MainPageComponent,
-    EditEmployeeComponent,
-    MockComponentComponent
   ],
   imports: [
     BrowserModule,
