@@ -13,7 +13,7 @@ import { RegistrationFormComponent } from './registration-form/registration-form
 // canActivate: [AuthGuardService]
 const routes: Routes = [
   {path: '', component: RegistrationFormComponent},
-  {path: 'home/:name', component: MainPageComponent, children:[
+  {path: 'home/:name', canActivate: [AuthGuardService], component: MainPageComponent, children:[
     {path: 'cardview', component: CardViewComponent},
     {path: 'listview', component: ListViewComponent},
   ]},

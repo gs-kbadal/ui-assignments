@@ -10,24 +10,26 @@ import { ApiService } from "../shared/api.service";
   styleUrls: ["./card-view.component.scss"],
 })
 export class CardViewComponent implements OnInit {
-  // employeDetails!: any;
 
-  employeeObj : employeeModel = new employeeModel();
-
+  employeeObj: employeeModel = new employeeModel();
   employeDetails!: employeeModel;
-  validateForm : FormGroup;
+  validateForm: FormGroup;
 
-  radioValue = '';
+  radioValue = "";
   options = [
-    { label: 'Male', value: 'Male' },
-    { label: 'Female', value: 'Female' }
+    { label: "Male", value: "Male" },
+    { label: "Female", value: "Female" },
   ];
 
   isVisible = false;
   isCancel = null;
   isOk = null;
 
-  constructor(private api: ApiService, private modalService: NzModalService,private fb: FormBuilder) {}
+  constructor(
+    private api: ApiService,
+    private modalService: NzModalService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.getAllEmployeeDetails();
@@ -39,7 +41,7 @@ export class CardViewComponent implements OnInit {
       companyId: [null, [Validators.required]],
       gender: [null, [Validators.required]],
       doj: [null, [Validators.required]],
-      department : [null, [Validators.required]],
+      department: [null, [Validators.required]],
     });
   }
 
@@ -58,9 +60,6 @@ export class CardViewComponent implements OnInit {
           alert("Employee details updated successfully!");
           this.isVisible = false;
           this.getAllEmployeeDetails();
-          // this.api.getEmployee();
-          // this.modal.destroy();
-          // this.validateForm.reset();
         },
         (error: any) => {
           console.log(error);
