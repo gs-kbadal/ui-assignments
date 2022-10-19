@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <h2>Create a new account</h2>
+      
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="uemail">Username</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Invalid Username!">
+          <input nz-input formControlName="uemail" id="uemail" placeholder="Username" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="8" nzRequired nzFor="password">Password</nz-form-label>
+        <nz-form-control [nzSpan]="14" nzErrorTip="Enter Password">
+          <input nz-input type="password" formControlName="password" placeholder="password" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item nz-row class="register-area">
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button nzType="primary">SignUp</button><br>
+          <a routerLink="/login"><strong>Already a member</strong></a>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</div>

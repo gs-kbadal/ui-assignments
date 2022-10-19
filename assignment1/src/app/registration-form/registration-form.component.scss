@@ -1,0 +1,34 @@
+[nz-form] {
+    max-width: 600px;
+  }
+
+  .phone-select {
+    width: 70px;
+  }
+
+  .register-are {
+    margin-bottom: 8px;
+  }
+
+  .row {
+    display: flex;
+    height: 800px;
+    background-color: #f0f2f5;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .col{
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border: 4px solid;
+    box-shadow: 10px 10px 10px 10px;
+  }
+
+  h2 {
+    color: blue;
+  }

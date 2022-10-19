@@ -1,0 +1,123 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "kumar badal",
+      "email": "kbadal@gainsight.com",
+      "companyId": "hello moto",
+      "gender": "Male",
+      "doj": "09/27/2022",
+      "department": "Engineering"
+    },
+    {
+      "id": 3,
+      "name": "sivang",
+      "email": "sw@c.com",
+      "companyId": "fdsa4567",
+      "gender": "Male",
+      "doj": "09/05/2022",
+      "department": "HR"
+    },
+    {
+      "id": 4,
+      "name": "swapnil",
+      "email": "nn@gmail.com",
+      "companyId": "gs3490",
+      "gender": "Male",
+      "doj": "10/08/2022",
+      "department": "TechOps"
+    },
+    {
+      "id": 5,
+      "name": "funny",
+      "email": "f@g.com",
+      "companyId": "hg44567",
+      "gender": "Female",
+      "doj": "09/05/2022",
+      "department": "Documentation"
+    },
+    {
+      "id": 6,
+      "name": "hello",
+      "email": "jfdks@g.com",
+      "companyId": "kjh",
+      "gender": "Female",
+      "doj": "10/15/2022",
+      "department": "DevOps"
+    },
+    {
+      "id": 7,
+      "name": "adsfa",
+      "email": "jsfj@gmail.com",
+      "companyId": "dsa",
+      "gender": "Male",
+      "doj": "10/22/2022",
+      "department": "TechOps"
+    },
+    {
+      "name": "adsfa",
+      "email": "jsfj@gmail.com",
+      "companyId": "sdfa",
+      "gender": "Female",
+      "doj": "09/10/2022",
+      "department": "DevOps",
+      "id": 8
+    },
+    {
+      "name": "adsfa",
+      "email": "jsfj@gmail.com",
+      "companyId": "dsf",
+      "gender": "Male",
+      "doj": "29/10/2022",
+      "department": "Designing",
+      "id": 9
+    },
+    {
+      "name": "assd",
+      "email": "jhh@gmail.com",
+      "companyId": "sda",
+      "gender": "Male",
+      "doj": "10/25/2022",
+      "department": "DevOps",
+      "id": 10
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "admin@gainsight.com",
+      "password": "admin@123",
+      "role": "ADMIN"
+    },
+    {
+      "username": "kbadal@gainsight.com",
+      "password": "badal@123",
+      "role": "user",
+      "id": 2
+    },
+    {
+      "username": "kumar@gmail.com",
+      "password": "kumar@123",
+      "role": "user",
+      "id": 3
+    },
+    {
+      "username": "swapnil@g.com",
+      "password": "badal@123",
+      "role": "user",
+      "id": 4
+    },
+    {
+      "username": "ayush@gmail.com",
+      "password": "badal@123",
+      "role": "user",
+      "id": 5
+    }
+  ],
+  "login": [
+    {
+      "id": 1,
+      "login": true
+    }
+  ]
+}
