@@ -2,14 +2,19 @@
   <nz-sider nzCollapsible [nzCollapsedWidth]="0">
 
     <ul nz-menu nzTheme="dark" nzMode="inline">
-      <li nz-menu-item>
-        <span nz-icon nzType="profile" nzTheme="outline"></span>
-        <span><a [routerLink] = "['/home','listview']" style="color: white;">List View</a></span>
-      </li>
-      <li nz-menu-item>
-        <span nz-icon nzType="container" nzTheme="outline"></span>
-        <span><a [routerLink] = "['/home','cardview']" style="color: white;">Card View</a></span>
-      </li>
+      <a [routerLink]="['/home','listview']" style="color: white;">
+        <li nz-menu-item>
+          <span nz-icon nzType="profile" nzTheme="outline"></span>
+          <span>List View</span>
+        </li>
+      </a>
+      <a [routerLink]="['/home','cardview']" style="color: white;">
+        <li nz-menu-item>
+          <span nz-icon nzType="container" nzTheme="outline"></span>
+          <span>Card View</span>
+        </li>
+      </a>
+
     </ul>
   </nz-sider>
   <nz-layout>
@@ -29,20 +34,20 @@
           </div>
         </div>
       </div>
-      
+
     </nz-header>
     <nz-content>
       <div class="inner-content">
         <div class="btn">
           <div class="col1">
-            <button nz-button nzType="primary" (click)="showModal2()">Add Employee</button>
+            <button nz-button nzType="primary" (click)="showModal()">Add Employee</button>
           </div>
         </div>
-       
-       <div class="view">
-        <router-outlet></router-outlet>
-       </div>
-        
+
+        <div class="view">
+          <router-outlet></router-outlet>
+        </div>
+
       </div>
     </nz-content>
     <nz-footer>Angular ©2020 Implement By Badal</nz-footer>

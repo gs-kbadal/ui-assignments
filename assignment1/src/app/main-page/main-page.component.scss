@@ -15,23 +15,19 @@
 
   .row {
     display: flex;
-    // background-color: yellow;
   }
 
   .nav1 {
     flex: 20%;
-    // background-color: grey;
   }
 
   .nav2 {
     flex: 40%;
-    // background-color: green;
     display: flex;
   }
 
   .profile{
     flex: 50%;
-    // background-color: black;
     align-items: end;
     justify-content: flex-end;
   }
@@ -40,7 +36,6 @@
     height: 50px;
     width: 200px;
     align-items: flex-end;
-    // background-color: blue;
   }
 
 
@@ -68,7 +63,6 @@
   .col1 {
     height: 50px;
     width: 150px;
-    // flex: 50%;
     color: white;
   }
 

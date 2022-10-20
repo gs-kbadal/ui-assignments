@@ -36,14 +36,7 @@ export class EmployeeFormComponent implements OnInit {
     });
   }
 
-  checkOptionsOne = [
-    { label: 'Reading', value: 'Reading'},
-    { label: 'Cricket', value: 'Cricket' },
-    { label: 'Music', value: 'Music' },
-    { label: 'Dance', value: 'Dance' },
-    { label: 'Chess', value: 'Chess' }
-  ];
-
+  // to submit the emoloyee details in database
   submitForm(): void {
     if (this.validateForm.valid) {
 
@@ -55,7 +48,6 @@ export class EmployeeFormComponent implements OnInit {
     this.employeeObj.department = this.validateForm.value.department;
 
     this.api.postEmployee(this.employeeObj).subscribe((res: any) => {
-      console.log(res);
       alert('Employee details added successfully!');
       this.modal.destroy();
       this.validateForm.reset();
@@ -79,10 +71,12 @@ export class EmployeeFormComponent implements OnInit {
     console.log(value);
   }
 
+  // to destroy the modal created 
   destroyModal(): void {
     this.modal.destroy();
   }
 
+  // to get all the employee details
   getAllEmployeeDetails(){
     this.api.getEmployee().subscribe(res=>{
       this.employeDetails = res;

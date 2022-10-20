@@ -1,57 +1,30 @@
 {
   "employees": [
     {
-      "id": 14,
-      "name": "abhisehk",
-      "email": "jhh@gmail.com",
-      "companyId": "0987",
-      "gender": "Male",
-      "doj": "2022-10-30T18:30:00.000Z",
-      "department": "Designing"
-    },
-    {
-      "id": 15,
-      "name": "kumar badal",
-      "email": "kbadal@gainsight.com",
-      "companyId": "GS2410",
-      "gender": "Male",
-      "doj": "2022-08-27T18:30:00.000Z",
-      "department": "Engineering"
-    },
-    {
-      "id": 16,
-      "name": "Productionserverkj",
-      "email": "nn@gmail.com",
-      "companyId": "1234",
-      "gender": "Male",
-      "doj": "2022-02-27T18:30:00.000Z",
-      "department": "TechOps"
-    },
-    {
+      "id": 17,
       "name": "swapnil",
       "email": "sw@c.com",
       "companyId": "gs3456",
       "gender": "Male",
-      "doj": "2022-10-31T06:30:07.647Z",
-      "department": "Documentation",
-      "id": 17
+      "doj": "2022-08-31T06:30:07.647Z",
+      "department": "TechOps"
     },
     {
-      "name": "adsfa",
+      "id": 18,
+      "name": "hello moto",
       "email": "jsfj@gmail.com",
-      "companyId": "0987",
+      "companyId": "gs2345",
       "gender": "Female",
-      "doj": "2022-10-31T06:32:53.982Z",
-      "department": "Documentation",
-      "id": 18
+      "doj": "2023-08-31T06:32:53.982Z",
+      "department": "HR"
     },
     {
-      "name": "kbadal@adsf",
-      "email": "jsfj@gmail.com",
-      "companyId": "dsfsd",
+      "name": "kumar badal",
+      "email": "kbadal@gainsight.com",
+      "companyId": "GS2410",
       "gender": "Male",
-      "doj": "2022-10-31T08:31:21.317Z",
-      "department": "TechOps",
+      "doj": "2022-07-31T18:37:16.633Z",
+      "department": "Engineering",
       "id": 19
     }
   ],

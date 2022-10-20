@@ -22,7 +22,8 @@ export class MainPageComponent implements OnInit {
     this.isVisibleMiddle = true;
   }
 
-  showModal2(): void {
+  // to load the form in modal on clicking the add button
+  showModal(): void {
     this.modalService.create({
       nzTitle: 'Employee details',
       nzContent: EmployeeFormComponent,
@@ -44,6 +45,7 @@ export class MainPageComponent implements OnInit {
     this.name = this.user.username;
   }
 
+  
   onLogout(){
     this.authservice.logout();
     localStorage.removeItem('user');

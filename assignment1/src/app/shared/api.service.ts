@@ -10,6 +10,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  // api call for posting data
   postEmployee(data : any){
     return this.http.post<any>("http://localhost:3000/employees",data).
     pipe(map((res:any)=>{
@@ -17,6 +18,7 @@ export class ApiService {
     }))
   }
 
+  // api call for getting employee
   getEmployee(){
     return this.http.get<any>("http://localhost:3000/employees").
     pipe(map((res:any)=>{
@@ -24,6 +26,7 @@ export class ApiService {
     }))
   }
 
+  // api call for updating the employee
   updateEmployee(data : any, id: number){
     console.log("api updata",data,id);
     return this.http.put<any>("http://localhost:3000/employees/"+id, data).
@@ -32,6 +35,7 @@ export class ApiService {
     }))
   }
 
+  // api call for deleting the employee
   deleteEmployee(id: number){
     return this.http.delete<any>("http://localhost:3000/employees/"+id).
     pipe(map((res:any)=>{
@@ -39,6 +43,7 @@ export class ApiService {
     }))
   }
 
+  // api call for signing the user 
   signUp(data:any){
     return this.http.post<any>("http://localhost:3000/users",data).
     pipe(map((res:any)=>{
@@ -46,41 +51,22 @@ export class ApiService {
     }))
   }
 
+  // api call for logging the user
   login(data: any){
     const username = data.username;
     const password = data.password;
 
     const params = new HttpParams().set("username", username).set("password", password);
 
-    // console.log("login credential->",name,password);
-    
     return this.http.get<any>("http://localhost:3000/users",{params}).
     pipe(map((res:any)=>{
       return res;
     }))
   }
 
-  // http://localhost:3000/employees/4
-
+  // api call for getting the single employee
   getSingleEmployee(id: number){
     return this.http.get<any>("http://localhost:3000/employees/"+id).
-    pipe(map((res:any)=>{
-      console.log("res:->",res);
-      return res;
-    }));
-  }
-
-  // http://localhost:3000/login
-
-  LoggedIn(data: any, id: number){
-    return this.http.put<any>("http://localhost:3000/login/"+id, data).
-    pipe(map((res:any)=>{
-      return res;
-    }))
-  }
-
-  getLogIn(id: number){
-    return this.http.get<any>("http://localhost:3000/login/"+id).
     pipe(map((res:any)=>{
       console.log("res:->",res);
       return res;

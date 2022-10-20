@@ -32,6 +32,7 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
+  // for user logging
   submitForm(): void {
     if (this.validateForm.valid) {
       this.loginObj.username = this.validateForm.value.userName;
@@ -47,12 +48,9 @@ export class LoginFormComponent implements OnInit {
           alert("login successfull!!");
           this.userState = user;
           localStorage.setItem('user', JSON.stringify(this.userState));
-          // const uu = JSON.parse(localStorage.getItem('user'));
-          // console.log("local storage uu",uu);
-          // console.log("userState-> ",this.userState);
           this.authService.login();
           this.validateForm.reset();
-          this.router.navigate(["home"]);
+          this.router.navigate(["home","listview"]);
         } else {
           alert("invalid credentials!");
         }

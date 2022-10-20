@@ -21,7 +21,7 @@
 <nz-modal [(nzVisible)]="isVisible" nzTitle="Employee Details" [(nzCancelText)]="isCancel" [(nzOkText)]="isOk"
   (nzOnCancel)="handleCancel()">
   <div>
-    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="updateForm()">
       <nz-form-item>
         <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="name" nzRequired>Name</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter name">

@@ -10,23 +10,26 @@ import { ApiService } from "../shared/api.service";
   styleUrls: ["./card-view.component.scss"],
 })
 export class CardViewComponent implements OnInit {
-
-  employeeObj : employeeModel = new employeeModel();
+  employeeObj: employeeModel = new employeeModel();
 
   employeDetails!: employeeModel;
-  validateForm : FormGroup;
+  validateForm: FormGroup;
 
-  radioValue = '';
+  radioValue = "";
   options = [
-    { label: 'Male', value: 'Male' },
-    { label: 'Female', value: 'Female' }
+    { label: "Male", value: "Male" },
+    { label: "Female", value: "Female" },
   ];
 
   isVisible = false;
   isCancel = null;
   isOk = null;
 
-  constructor(private api: ApiService, private modalService: NzModalService,private fb: FormBuilder) {}
+  constructor(
+    private api: ApiService,
+    private modalService: NzModalService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.getAllEmployeeDetails();
@@ -38,22 +41,18 @@ export class CardViewComponent implements OnInit {
       companyId: [null, [Validators.required]],
       gender: [null, [Validators.required]],
       doj: [null, [Validators.required]],
-      department : [null, [Validators.required]],
+      department: [null, [Validators.required]],
     });
   }
 
-  submitForm(): void {
+  // to update the employee details
+  updateForm(): void {
     if (this.validateForm.valid) {
-      console.log("submit", this.validateForm.value);
       const id = this.validateForm.value.id;
-      console.log("value of id->", id);
-      console.log("coming data id for form", id);
       this.employeeObj = this.validateForm.value;
-      console.log("emp--->", this.employeeObj);
 
       this.api.updateEmployee(this.employeeObj, id).subscribe(
         (res: any) => {
-          console.log("api sending for update->", res);
           alert("Employee details updated successfully!");
           this.isVisible = false;
           this.getAllEmployeeDetails();
@@ -73,33 +72,34 @@ export class CardViewComponent implements OnInit {
     this.validateForm.reset;
   }
 
-  format(inputDate) {
-    let date, month, year;
-
-    const day = (inputDate).slice(0,10);
-
-    year = day.slice(0,4);
-    month = day.slice(5,7);
-    date = day.slice(8,10);
-    let dd = parseInt(date) + 1;
-    if(dd===32){
-      dd=31;
+  // to format the date according to MM/DD/YYYY
+  format(inputDate: any) {
+    let date: any, month: any, year: any;
+    const day = inputDate.slice(0, 10);
+    year = day.slice(0, 4);
+    month = day.slice(5, 7);
+    date = day.slice(8, 10);
+    let dd = parseInt(date);
+    if (dd === 32) {
+      dd = 31;
     }
     date = dd;
-  
+
     return `${month}/${date}/${year}`;
   }
 
+  // to get all the employee details
   getAllEmployeeDetails() {
     this.api.getEmployee().subscribe((res) => {
       this.employeDetails = res;
-      for(var index in this.employeDetails){
+      for (var index in this.employeDetails) {
         let day = this.format(this.employeDetails[index].doj);
         this.employeDetails[index].doj = day;
       }
     });
   }
 
+  // to delete the employee details
   deleteEmployee(row: any) {
     this.api.deleteEmployee(row.id).subscribe((res) => {
       alert("Employee deleted!");
@@ -107,11 +107,14 @@ export class CardViewComponent implements OnInit {
     });
   }
 
+  // to open the employee form in modal for edit purpose and prepopulate the form
   showModal(data: any): void {
     this.isVisible = true;
     nzCancelText: null;
     nzOkText: null;
-    this.validateForm.setValue(data);
+    this.api.getSingleEmployee(data.id).subscribe((res) => {
+      this.validateForm.setValue(res);
+    });
   }
 
   handleOk(): void {
@@ -119,7 +122,6 @@ export class CardViewComponent implements OnInit {
   }
 
   handleCancel(): void {
-    console.log("Button cancel clicked!");
     this.isVisible = false;
   }
 }

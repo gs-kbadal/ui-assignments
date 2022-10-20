@@ -1,3 +1,4 @@
+import { ThrowStmt } from "@angular/compiler";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NzModalRef, NzModalService } from "ng-zorro-antd";
@@ -50,20 +51,14 @@ export class ListViewComponent implements OnInit {
     });
   }
 
-
-  submitForm(): void {
+  // to update the employee details
+  updateForm(): void {
     if (this.validateForm.valid) {
-      console.log("submit", this.validateForm.value);
       const id = this.validateForm.value.id;
-      console.log("value of id->", id);
-      console.log("coming data id for form", id);
       this.employeeObj = this.validateForm.value;
-      // this.employeeObj.doj = this.format(this.validateForm.value.doj);
-      // console.log("emp--->", this.employeeObj);
 
       this.api.updateEmployee(this.employeeObj, id).subscribe(
         (res: any) => {
-          console.log("api sending for update->", res);
           alert("Employee details updated successfully!");
           this.isVisible = false;
           this.getAllEmployeeDetails();
@@ -83,33 +78,30 @@ export class ListViewComponent implements OnInit {
     this.validateForm.reset;
   }
 
-  format(inputDate) {
-    let date, month, year;
+  // to format the date according to MM/DD/YYYY
+  format(inputDate: any) {
+    let date: any, month: any, year: any;
+    const day = inputDate.slice(0, 10);
 
-    const day = (inputDate).slice(0,10);
+    year = day.slice(0, 4);
+    month = day.slice(5, 7);
+    date = day.slice(8, 10);
 
-    year = day.slice(0,4);
-    month = day.slice(5,7);
-    date = day.slice(8,10);
-    let dd = parseInt(date) + 1;
-    if(dd===32){
-      dd=31;
-    }
-    date = dd;
-  
     return `${month}/${date}/${year}`;
   }
 
+  // to get all the employee details
   getAllEmployeeDetails() {
     this.api.getEmployee().subscribe((res) => {
       this.employeDetails = res;
-      for(var index in this.employeDetails){
+      for (var index in this.employeDetails) {
         let day = this.format(this.employeDetails[index].doj);
         this.employeDetails[index].doj = day;
       }
     });
   }
 
+  // to delete the employee details
   deleteEmployee(row: any) {
     this.api.deleteEmployee(row.id).subscribe((res) => {
       alert("Employee deleted!");
@@ -117,11 +109,14 @@ export class ListViewComponent implements OnInit {
     });
   }
 
+  // to show edit form in modal and also prepulate the form
   showModal(data: any): void {
     this.isVisible = true;
     nzCancelText: null;
     nzOkText: null;
-    this.validateForm.setValue(data);
+    this.api.getSingleEmployee(data.id).subscribe((res) => {
+      this.validateForm.setValue(res);
+    });
   }
 
   handleOk(): void {
@@ -129,7 +124,6 @@ export class ListViewComponent implements OnInit {
   }
 
   handleCancel(): void {
-    console.log("Button cancel clicked!");
     this.isVisible = false;
   }
 }
