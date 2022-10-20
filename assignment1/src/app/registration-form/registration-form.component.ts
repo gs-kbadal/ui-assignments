@@ -1,34 +1,28 @@
-import { registerLocaleData } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from "@angular/forms";
-import { Router } from "@angular/router";
-import { ApiService } from "../shared/api.service";
-import { registration } from "./registration.model";
+import { registerLocaleData } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ApiService } from '../shared/api.service';
+import { registration } from './registration.model';
+
 
 @Component({
-  selector: "app-registration-form",
-  templateUrl: "./registration-form.component.html",
-  styleUrls: ["./registration-form.component.scss"],
+  selector: 'app-registration-form',
+  templateUrl: './registration-form.component.html',
+  styleUrls: ['./registration-form.component.scss']
 })
 export class RegistrationFormComponent implements OnInit {
-  registerObj: registration = new registration();
 
-  constructor(
-    private fb: FormBuilder,
-    private api: ApiService,
-    private router: Router
-  ) {}
+  registerObj : registration = new registration();
+
+  constructor(private fb: FormBuilder, private api: ApiService, private router: Router) { }
 
   ngOnInit() {
     this.validateForm = this.fb.group({
+      // uname: [null, [Validators.required]],
       uemail: [null, [Validators.email, Validators.required]],
       password: [null, [Validators.required]],
-      agree: [false],
+      agree: [false]
     });
   }
 
@@ -38,29 +32,30 @@ export class RegistrationFormComponent implements OnInit {
     if (this.validateForm.valid) {
       this.registerObj.username = this.validateForm.value.uemail;
       this.registerObj.password = this.validateForm.value.password;
-      this.registerObj.role = "user";
+      this.registerObj.role = 'user';
 
-      this.api.signUp(this.registerObj).subscribe(
-        (res: any) => {
-          alert("SignUp successfull!");
-          this.validateForm.reset();
-        },
-        (error: any) => {
-          console.log(error);
-        }
-      );
+      this.api.signUp(this.registerObj).subscribe((res: any) => {
+        alert('SignUp successfull!');
+        this.validateForm.reset();
+      },(error: any)=>{
+        console.log(error);
+      })
+      // console.log('submit', this.validateForm.value);
       this.router.navigate(["login"]);
+
     } else {
-      Object.values(this.validateForm.controls).forEach((control) => {
+      Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
         }
       });
     }
+    
   }
 
   log(value: object[]): void {
     console.log(value);
   }
+
 }

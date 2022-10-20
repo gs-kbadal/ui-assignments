@@ -8,8 +8,8 @@
         <p>Gender: {{data.gender}}</p>
         <p>DOJ : {{data.doj}}</p>
         <p>Department: {{data.department}}</p>
-        <a (click)="showModal(data)">Edit</a>
-        <a (click)="deleteEmployee(data)">Delete</a>
+        <a (click)="showModal(data)" title="Edit"><span nz-icon nzType="form" nzTheme="outline"></span></a>
+        <a (click)="deleteEmployee(data)" title="Delete"><span nz-icon nzType="delete" nzTheme="outline"></span></a>
       </div>
     </div>
   </nz-card>

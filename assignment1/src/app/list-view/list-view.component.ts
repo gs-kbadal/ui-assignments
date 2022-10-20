@@ -50,24 +50,6 @@ export class ListViewComponent implements OnInit {
     });
   }
 
-  protected format(inputDate) {
-    let date, month, year;
-  
-    date = inputDate.getDate();
-    month = inputDate.getMonth() + 1;
-    year = inputDate.getFullYear();
-  
-      date = date
-          .toString()
-          .padStart(2, '0');
-  
-      month = month
-          .toString()
-          .padStart(2, '0');
-  
-    return `${month}/${date}/${year}`;
-  }
-
 
   submitForm(): void {
     if (this.validateForm.valid) {
@@ -76,7 +58,7 @@ export class ListViewComponent implements OnInit {
       console.log("value of id->", id);
       console.log("coming data id for form", id);
       this.employeeObj = this.validateForm.value;
-      this.employeeObj.doj = this.format(this.validateForm.value.doj);
+      // this.employeeObj.doj = this.format(this.validateForm.value.doj);
       // console.log("emp--->", this.employeeObj);
 
       this.api.updateEmployee(this.employeeObj, id).subscribe(
@@ -101,9 +83,34 @@ export class ListViewComponent implements OnInit {
     this.validateForm.reset;
   }
 
+  format(inputDate) {
+    let date, month, year;
+
+    const day = (inputDate).slice(0,10);
+    console.log(day);
+
+    year = day.slice(0,4);
+    month = day.slice(5,7);
+    date = day.slice(8,10);
+    let dd = parseInt(date) + 1;
+    if(dd===32){
+      dd=31;
+    }
+    date = dd;
+  
+    return `${month}/${date}/${year}`;
+  }
+
   getAllEmployeeDetails() {
     this.api.getEmployee().subscribe((res) => {
       this.employeDetails = res;
+      console.log(this.employeDetails);
+
+      for(var index in this.employeDetails){
+        let day = this.format(this.employeDetails[index].doj);
+        console.log(day);
+        this.employeDetails[index].doj = day;
+      }
     });
   }
 

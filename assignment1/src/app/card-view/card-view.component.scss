@@ -5,20 +5,19 @@ a {
     padding: 8px;
 }
 
-a:hover {
+a:hover{
     background-color: blue;
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-}
+    grid-template-columns:repeat(3, 1fr);
+  }
 
 .grid-item {
     background-color: rgba(255, 255, 255, 0.8);
     text-align: left;
 }
-
-.has-text-centered {
-    padding: 2rem;
+.has-text-centered{
+    padding:2rem;
 }

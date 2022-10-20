@@ -8,17 +8,19 @@ import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import { ListViewComponent } from './list-view/list-view.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { MockComponentComponent } from './mock-component/mock-component.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 
 // canActivate: [AuthGuardService]
 const routes: Routes = [
   {path: '', component: RegistrationFormComponent},
-  {path: 'home/:name', canActivate: [AuthGuardService], component: MainPageComponent, children:[
+  {path: 'home/:name', component: MainPageComponent, children:[
     {path: 'cardview', component: CardViewComponent},
     {path: 'listview', component: ListViewComponent},
   ]},
   {path: 'login', component: LoginFormComponent},
   {path: 'employee', component: EmployeeFormComponent},
+  {path: 'mock/:id', component: MockComponentComponent},
 ];
 
 @NgModule({

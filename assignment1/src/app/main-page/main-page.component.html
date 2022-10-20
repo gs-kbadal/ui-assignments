@@ -4,11 +4,11 @@
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item>
         <span nz-icon nzType="profile" nzTheme="outline"></span>
-        <span><a [routerLink]="['/home',user,'listview']" style="color: white;">List View</a></span>
+        <span><a [routerLink] = "['/home',user,'listview']" style="color: white;">List View</a></span>
       </li>
       <li nz-menu-item>
         <span nz-icon nzType="container" nzTheme="outline"></span>
-        <span><a [routerLink]="['/home',user,'cardview']" style="color: white;">Card View</a></span>
+        <span><a [routerLink] = "['/home',user,'cardview']" style="color: white;">Card View</a></span>
       </li>
     </ul>
   </nz-sider>
@@ -29,7 +29,7 @@
           </div>
         </div>
       </div>
-
+      
     </nz-header>
     <nz-content>
       <div class="inner-content">
@@ -38,11 +38,11 @@
             <button nz-button nzType="primary" (click)="showModal2()">Add Employee</button>
           </div>
         </div>
-
-        <div class="view">
-          <router-outlet></router-outlet>
-        </div>
-
+       
+       <div class="view">
+        <router-outlet></router-outlet>
+       </div>
+        
       </div>
     </nz-content>
     <nz-footer>Angular ©2020 Implement By Badal</nz-footer>

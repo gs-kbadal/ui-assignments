@@ -22,9 +22,9 @@
       <td>{{ data.doj }}</td>
       <td>{{ data.department }}</td>
       <td>
-        <button (click)="showModal(data)">Edit</button>
+        <a (click)="showModal(data)" title="Edit"><span nz-icon nzType="form" nzTheme="outline"></span></a>
         <nz-divider nzType="vertical"></nz-divider>
-        <button (click)="deleteEmployee(data)">Delete</button>
+        <a (click)="deleteEmployee(data)" title="Delete"><span nz-icon nzType="delete" nzTheme="outline"></span></a>
       </td>
     </tr>
   </tbody>
