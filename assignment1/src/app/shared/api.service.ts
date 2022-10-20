@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import {map} from 'rxjs/operators';
 // import { AuthService } from '../auth.service';
 
@@ -47,10 +47,14 @@ export class ApiService {
   }
 
   login(data: any){
-    const name = data.username;
+    const username = data.username;
     const password = data.password;
-    console.log("login credential->",name,password);
-    return this.http.get<any>("http://localhost:3000/users").
+
+    const params = new HttpParams().set("username", username).set("password", password);
+
+    // console.log("login credential->",name,password);
+    
+    return this.http.get<any>("http://localhost:3000/users",{params}).
     pipe(map((res:any)=>{
       return res;
     }))
