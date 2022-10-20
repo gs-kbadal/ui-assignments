@@ -76,6 +76,12 @@
       "password": "badal@123",
       "role": "user",
       "id": 5
+    },
+    {
+      "username": "abhishek@gmail.com",
+      "password": "badal@123",
+      "role": "user",
+      "id": 6
     }
   ],
   "login": [

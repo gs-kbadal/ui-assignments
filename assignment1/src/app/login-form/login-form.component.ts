@@ -37,17 +37,19 @@ export class LoginFormComponent implements OnInit {
       console.log(this.loginObj.password);
       this.api.login(this.loginObj).subscribe((res) => {
         const user = res.find((a: any) => {
-          return a.username === this.loginObj.username && a.password === this.loginObj.password;
+          return (
+            a.username === this.loginObj.username &&
+            a.password === this.loginObj.password
+          );
         });
         if (user) {
           alert("login successfull!!");
           this.authService.login();
           this.validateForm.reset();
           const n = this.loginObj.username;
-          this.router.navigate(["home",n]);
-        }
-        else{
-          alert('invalid credentials!');
+          this.router.navigate(["home", n]);
+        } else {
+          alert("invalid credentials!");
         }
       });
       console.log("submit", this.validateForm.value);
