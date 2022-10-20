@@ -6,7 +6,7 @@
       "email": "jhh@gmail.com",
       "companyId": "0987",
       "gender": "Male",
-      "doj": "2022-10-28T18:30:00.000Z",
+      "doj": "2022-10-30T18:30:00.000Z",
       "department": "Designing"
     },
     {
@@ -44,6 +44,15 @@
       "doj": "2022-10-31T06:32:53.982Z",
       "department": "Documentation",
       "id": 18
+    },
+    {
+      "name": "kbadal@adsf",
+      "email": "jsfj@gmail.com",
+      "companyId": "dsfsd",
+      "gender": "Male",
+      "doj": "2022-10-31T08:31:21.317Z",
+      "department": "TechOps",
+      "id": 19
     }
   ],
   "users": [

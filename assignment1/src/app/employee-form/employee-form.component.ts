@@ -44,42 +44,19 @@ export class EmployeeFormComponent implements OnInit {
     { label: 'Chess', value: 'Chess' }
   ];
 
-
-  // protected format(inputDate) {
-  //   let date, month, year;
-  //   date = inputDate.getDate();
-  //   month = inputDate.getMonth() + 1;
-  //   year = inputDate.getFullYear();
-  
-  //     date = date
-  //         .toString()
-  //         .padStart(2, '0');
-  
-  //     month = month
-  //         .toString()
-  //         .padStart(2, '0');
-  
-  //   return `${month}/${date}/${year}`;
-  // }
-
-
   submitForm(): void {
     if (this.validateForm.valid) {
-
-    let date = this.validateForm.value.doj;
-    // date = this.format(date);
 
     this.employeeObj.name = this.validateForm.value.name;
     this.employeeObj.email = this.validateForm.value.email;
     this.employeeObj.companyId = this.validateForm.value.companyId;
     this.employeeObj.gender = this.validateForm.value.gender;
-    this.employeeObj.doj = date;
+    this.employeeObj.doj = this.validateForm.value.doj;
     this.employeeObj.department = this.validateForm.value.department;
 
     this.api.postEmployee(this.employeeObj).subscribe((res: any) => {
       console.log(res);
       alert('Employee details added successfully!');
-      // this.api.getEmployee();
       this.modal.destroy();
       this.validateForm.reset();
       this.getAllEmployeeDetails();

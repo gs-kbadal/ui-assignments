@@ -4,11 +4,11 @@
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item>
         <span nz-icon nzType="profile" nzTheme="outline"></span>
-        <span><a [routerLink] = "['/home',user,'listview']" style="color: white;">List View</a></span>
+        <span><a [routerLink] = "['/home','listview']" style="color: white;">List View</a></span>
       </li>
       <li nz-menu-item>
         <span nz-icon nzType="container" nzTheme="outline"></span>
-        <span><a [routerLink] = "['/home',user,'cardview']" style="color: white;">Card View</a></span>
+        <span><a [routerLink] = "['/home','cardview']" style="color: white;">Card View</a></span>
       </li>
     </ul>
   </nz-sider>
@@ -22,7 +22,7 @@
           <div class="profile">
           </div>
           <div class="logout">
-            <span><strong>{{user}}</strong></span>
+            <span><strong>{{name}}</strong></span>
           </div>
           <div class="logout">
             <span><a (click)="onLogout()"><strong>Logout</strong></a></span>

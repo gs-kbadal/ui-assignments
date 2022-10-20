@@ -47,12 +47,7 @@ export class RegistrationFormComponent implements OnInit {
         });
         if (user) {
           alert("username already exists!!");
-          // this.authService.login();
-          // this.validateForm.reset();
-          // const n = this.registerObj.username;
-          // this.router.navigate(["home", n]);
         } else {
-          // alert("invalid credentials!");
           this.api.signUp(this.registerObj).subscribe(
             (res: any) => {
               alert("SignUp successfull!");
@@ -62,7 +57,6 @@ export class RegistrationFormComponent implements OnInit {
               console.log(error);
             }
           );
-          // console.log('submit', this.validateForm.value);
           this.router.navigate(["login"]);
         }
       });

@@ -87,7 +87,6 @@ export class ListViewComponent implements OnInit {
     let date, month, year;
 
     const day = (inputDate).slice(0,10);
-    console.log(day);
 
     year = day.slice(0,4);
     month = day.slice(5,7);
@@ -104,11 +103,8 @@ export class ListViewComponent implements OnInit {
   getAllEmployeeDetails() {
     this.api.getEmployee().subscribe((res) => {
       this.employeDetails = res;
-      console.log(this.employeDetails);
-
       for(var index in this.employeDetails){
         let day = this.format(this.employeDetails[index].doj);
-        console.log(day);
         this.employeDetails[index].doj = day;
       }
     });
@@ -125,7 +121,6 @@ export class ListViewComponent implements OnInit {
     this.isVisible = true;
     nzCancelText: null;
     nzOkText: null;
-    console.log("hlelo", data.id);
     this.validateForm.setValue(data);
   }
 

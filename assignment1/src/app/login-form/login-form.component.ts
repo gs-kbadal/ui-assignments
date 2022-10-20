@@ -14,6 +14,9 @@ import { login } from "./login.model";
 export class LoginFormComponent implements OnInit {
   validateForm!: FormGroup;
   loginObj: login = new login();
+
+  userState: any;
+
   constructor(
     private fb: FormBuilder,
     private api: ApiService,
@@ -44,10 +47,15 @@ export class LoginFormComponent implements OnInit {
         });
         if (user) {
           alert("login successfull!!");
+
+          this.userState = user;
+          localStorage.setItem('user', JSON.stringify(this.userState));
+          // const uu = JSON.parse(localStorage.getItem('user'));
+          // console.log("local storage uu",uu);
+          // console.log("userState-> ",this.userState);
           this.authService.login();
           this.validateForm.reset();
-          const n = this.loginObj.username;
-          this.router.navigate(["home", n]);
+          this.router.navigate(["home"]);
         } else {
           alert("invalid credentials!");
         }

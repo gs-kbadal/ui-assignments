@@ -36,10 +36,13 @@ export class MainPageComponent implements OnInit {
       private router: Router,
        private route: ActivatedRoute) { }
 
-  user: string = '';
+  user: any;
+  name: string = '';
 
   ngOnInit() {
-    this.user = this.route.snapshot.params['name'];
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.name = this.user.username;
+    console.log("userName->::",this.name);
     console.log(this.user);
   }
 
@@ -48,11 +51,5 @@ export class MainPageComponent implements OnInit {
     alert('Logout Succesfull!');
     this.router.navigate(['login']);
   }
-
-  // getAllEmployeeDetails(){
-  //   this.api.getEmployee().subscribe(res=>{
-  //     this.employeDetails = res;
-  //   })
-  // }
 
 }
