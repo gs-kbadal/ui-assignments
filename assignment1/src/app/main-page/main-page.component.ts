@@ -42,12 +42,11 @@ export class MainPageComponent implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.name = this.user.username;
-    console.log("userName->::",this.name);
-    console.log(this.user);
   }
 
   onLogout(){
     this.authservice.logout();
+    localStorage.removeItem('user');
     alert('Logout Succesfull!');
     this.router.navigate(['login']);
   }

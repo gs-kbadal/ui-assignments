@@ -46,14 +46,10 @@ export class ApiService {
     }))
   }
 
-  // getSignup(data: any){
-  //   return this.http.get<any>("http://localhost:3000/users").
-  //   pipe(map((res:any)=>{
-  //     return res;
-  //   }))
-  // }
-
   login(data: any){
+    const name = data.username;
+    const password = data.password;
+    console.log("login credential->",name,password);
     return this.http.get<any>("http://localhost:3000/users").
     pipe(map((res:any)=>{
       return res;

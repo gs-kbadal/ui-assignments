@@ -36,8 +36,6 @@ export class LoginFormComponent implements OnInit {
     if (this.validateForm.valid) {
       this.loginObj.username = this.validateForm.value.userName;
       this.loginObj.password = this.validateForm.value.password;
-      console.log(this.loginObj.username);
-      console.log(this.loginObj.password);
       this.api.login(this.loginObj).subscribe((res) => {
         const user = res.find((a: any) => {
           return (
@@ -47,7 +45,6 @@ export class LoginFormComponent implements OnInit {
         });
         if (user) {
           alert("login successfull!!");
-
           this.userState = user;
           localStorage.setItem('user', JSON.stringify(this.userState));
           // const uu = JSON.parse(localStorage.getItem('user'));
@@ -60,7 +57,6 @@ export class LoginFormComponent implements OnInit {
           alert("invalid credentials!");
         }
       });
-      console.log("submit", this.validateForm.value);
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
