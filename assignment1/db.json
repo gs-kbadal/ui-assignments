@@ -1,15 +1,6 @@
 {
   "employees": [
     {
-      "id": 17,
-      "name": "swapnil",
-      "email": "sw@c.com",
-      "companyId": "gs3456",
-      "gender": "Male",
-      "doj": "2022-08-31T06:30:07.647Z",
-      "department": "TechOps"
-    },
-    {
       "id": 18,
       "name": "hello moto",
       "email": "jsfj@gmail.com",

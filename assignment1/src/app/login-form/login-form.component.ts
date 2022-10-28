@@ -1,4 +1,4 @@
-import { ThrowStmt } from "@angular/compiler";
+import { ThrowStmt } from "@angular/compiler"; // TODO Remove unused imports in all the components
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -13,13 +13,13 @@ import { login } from "./login.model";
 })
 export class LoginFormComponent implements OnInit {
   validateForm!: FormGroup;
-  loginObj: login = new login();
+  loginObj: login = new login(); // TODO: Not required use local variable instead
 
-  userState: any;
+  userState: any; // Todo : Not required this variable
 
   constructor(
     private fb: FormBuilder,
-    private api: ApiService,
+    private api: ApiService, // Todo: Use proper naming convention api instead od apiService
     private router: Router,
     private authService: AuthService
   ) {}
@@ -35,9 +35,9 @@ export class LoginFormComponent implements OnInit {
   // for user logging
   submitForm(): void {
     if (this.validateForm.valid) {
-      this.loginObj.username = this.validateForm.value.userName;
+      this.loginObj.username = this.validateForm.value.userName; // Todo: Take directly .value instead of each value
       this.loginObj.password = this.validateForm.value.password;
-      this.api.login(this.loginObj).subscribe((res) => {
+      this.api.login(this.loginObj).subscribe((res) => { // Todo: unsubscribe mandatory in all the components
         const user = res.find((a: any) => {
           return (
             a.username === this.loginObj.username &&
@@ -45,9 +45,9 @@ export class LoginFormComponent implements OnInit {
           );
         });
         if (user) {
-          alert("login successfull!!");
+          alert("login successfull!!"); // Todo: Use notification component instead of alert in all places
           this.userState = user;
-          localStorage.setItem('user', JSON.stringify(this.userState));
+          localStorage.setItem('user', JSON.stringify(this.userState)); // Todo: Localstorage should be in service, check all the components
           this.authService.login();
           this.validateForm.reset();
           this.router.navigate(["home","listview"]);

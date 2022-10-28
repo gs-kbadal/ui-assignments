@@ -14,10 +14,10 @@ import { ApiService } from "../shared/api.service";
 export class ListViewComponent implements OnInit {
   employeeObj: employeeModel = new employeeModel();
 
-  employeDetails!: employeeModel;
+  employeDetails!: employeeModel; // Todo: Type should be array ex: employeeModel[]
   validateForm: FormGroup;
 
-  radioValue = "";
+  radioValue = ""; // Todo: remove unused variables in all the components
   options = [
     { label: "Male", value: "Male" },
     { label: "Female", value: "Female" },
@@ -29,7 +29,7 @@ export class ListViewComponent implements OnInit {
 
   pageIndex = 1;
   pageSize = 3;
-  // total = 500;
+  // total = 500; // Todo: remove commented code in all the components
 
   constructor(
     private api: ApiService,
@@ -75,11 +75,11 @@ export class ListViewComponent implements OnInit {
         }
       });
     }
-    this.validateForm.reset;
+    this.validateForm.reset; // Todo: reset is a method should use braces () in all the components
   }
 
   // to format the date according to MM/DD/YYYY
-  format(inputDate: any) {
+  format(inputDate: any) { // Todo: Use inbuilt angular date pipe
     let date: any, month: any, year: any;
     const day = inputDate.slice(0, 10);
 
@@ -94,8 +94,8 @@ export class ListViewComponent implements OnInit {
   getAllEmployeeDetails() {
     this.api.getEmployee().subscribe((res) => {
       this.employeDetails = res;
-      for (var index in this.employeDetails) {
-        let day = this.format(this.employeDetails[index].doj);
+      for (var index in this.employeDetails) { // Todo: should not use var
+        let day = this.format(this.employeDetails[index].doj); //Todo: can be removed day variable
         this.employeDetails[index].doj = day;
       }
     });
@@ -112,14 +112,14 @@ export class ListViewComponent implements OnInit {
   // to show edit form in modal and also prepulate the form
   showModal(data: any): void {
     this.isVisible = true;
-    nzCancelText: null;
+    nzCancelText: null; // Todo: we have to handle buttons using cancel and okText
     nzOkText: null;
     this.api.getSingleEmployee(data.id).subscribe((res) => {
       this.validateForm.setValue(res);
     });
   }
 
-  handleOk(): void {
+  handleOk(): void { // Todo: Remove unused code
     this.isVisible = false;
   }
 

@@ -31,7 +31,7 @@ export class MainPageComponent implements OnInit {
       nzOkText:null,
     });
   }
-
+  //Todo : Format properly
   constructor(private modalService: NzModalService,
      private authservice: AuthService,
       private router: Router,
@@ -45,7 +45,7 @@ export class MainPageComponent implements OnInit {
     this.name = this.user.username;
   }
 
-  
+
   onLogout(){
     this.authservice.logout();
     localStorage.removeItem('user');

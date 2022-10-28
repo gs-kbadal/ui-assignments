@@ -12,7 +12,8 @@ export class ApiService {
 
   // api call for posting data
   postEmployee(data : any){
-    return this.http.post<any>("http://localhost:3000/employees",data).
+    return this.http.post<any>("http://localhost:3000/employees",data). //Todo: Endpoints should in constants files
+      //Todo: Do not use pipe and map
     pipe(map((res:any)=>{
       return res;
     }))
@@ -43,7 +44,7 @@ export class ApiService {
     }))
   }
 
-  // api call for signing the user 
+  // api call for signing the user
   signUp(data:any){
     return this.http.post<any>("http://localhost:3000/users",data).
     pipe(map((res:any)=>{

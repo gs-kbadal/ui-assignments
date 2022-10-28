@@ -39,7 +39,7 @@ export class EmployeeFormComponent implements OnInit {
   // to submit the emoloyee details in database
   submitForm(): void {
     if (this.validateForm.valid) {
-
+  // Todo: use directly this.employeeObj = this.validateForm
     this.employeeObj.name = this.validateForm.value.name;
     this.employeeObj.email = this.validateForm.value.email;
     this.employeeObj.companyId = this.validateForm.value.companyId;
@@ -55,7 +55,7 @@ export class EmployeeFormComponent implements OnInit {
     },(error: any)=>{
       console.log(error);
     })
-      console.log('submit', this.validateForm.value);
+      console.log('submit', this.validateForm.value); // Todo: Remove console logs in all the places
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -67,12 +67,12 @@ export class EmployeeFormComponent implements OnInit {
     this.validateForm.reset;
   }
 
-  log(value: object[]): void {
+  log(value: object[]): void { //Todo: unused code remove
     console.log(value);
   }
 
-  // to destroy the modal created 
-  destroyModal(): void {
+  // to destroy the modal created
+  destroyModal(): void { //Todo: unused code remove
     this.modal.destroy();
   }
 
