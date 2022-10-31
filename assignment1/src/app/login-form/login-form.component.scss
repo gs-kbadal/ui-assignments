@@ -14,7 +14,7 @@
     width: 100%;
   }
 
-  .row {
+  .login_form_container {
     display: flex;
     height: 800px;
     background-color: #f0f2f5;
@@ -22,7 +22,7 @@
     justify-content: center;
   }
 
-  .col{
+  .login_form_container_body{
     width: 500px;
     height: 500px;
     background-color: white;

@@ -26,10 +26,8 @@ export class RegistrationFormComponent implements OnInit {
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-      // uname: [null, [Validators.required]],
       uemail: [null, [Validators.email, Validators.required]],
-      password: [null, [Validators.required]],
-      agree: [false],
+      password: [null, [Validators.required]]
     });
   }
 
@@ -70,7 +68,4 @@ export class RegistrationFormComponent implements OnInit {
     }
   }
 
-  log(value: object[]): void {
-    console.log(value);
-  }
 }

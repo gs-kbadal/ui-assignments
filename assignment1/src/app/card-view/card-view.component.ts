@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NzModalService } from "ng-zorro-antd";
 import { employeeModel } from "../employee-form/employee-form.model";
@@ -9,13 +9,15 @@ import { ApiService } from "../shared/api.service";
   templateUrl: "./card-view.component.html",
   styleUrls: ["./card-view.component.scss"],
 })
-export class CardViewComponent implements OnInit {
+export class CardViewComponent implements OnInit, OnDestroy {
   employeeObj: employeeModel = new employeeModel();
 
   employeDetails!: employeeModel;
   validateForm: FormGroup;
+  employee_details: any;
+  employee_delete: any;
+  employee_update: any;
 
-  radioValue = "";
   options = [
     { label: "Male", value: "Male" },
     { label: "Female", value: "Female" },
@@ -51,7 +53,7 @@ export class CardViewComponent implements OnInit {
       const id = this.validateForm.value.id;
       this.employeeObj = this.validateForm.value;
 
-      this.api.updateEmployee(this.employeeObj, id).subscribe(
+      this.employee_update = this.api.updateEmployee(this.employeeObj, id).subscribe(
         (res: any) => {
           alert("Employee details updated successfully!");
           this.isVisible = false;
@@ -90,7 +92,7 @@ export class CardViewComponent implements OnInit {
 
   // to get all the employee details
   getAllEmployeeDetails() {
-    this.api.getEmployee().subscribe((res) => {
+    this.employee_details = this.api.getEmployee().subscribe((res) => {
       this.employeDetails = res;
       for (var index in this.employeDetails) {
         let day = this.format(this.employeDetails[index].doj);
@@ -101,7 +103,7 @@ export class CardViewComponent implements OnInit {
 
   // to delete the employee details
   deleteEmployee(row: any) {
-    this.api.deleteEmployee(row.id).subscribe((res) => {
+    this.employee_delete = this.api.deleteEmployee(row.id).subscribe((res) => {
       alert("Employee deleted!");
       this.getAllEmployeeDetails();
     });
@@ -123,5 +125,11 @@ export class CardViewComponent implements OnInit {
 
   handleCancel(): void {
     this.isVisible = false;
+  }
+
+  ngOnDestroy(): void {
+    // this.employee_details.unsubscribe();
+    // this.employee_update.unsubscribe();
+    // this.employee_delete.unsubscribe();
   }
 }

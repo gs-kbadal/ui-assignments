@@ -34,8 +34,8 @@ export class MainPageComponent implements OnInit {
 
   constructor(private modalService: NzModalService,
      private authservice: AuthService,
-      private router: Router,
-       private route: ActivatedRoute) { }
+     private router: Router,
+     private route: ActivatedRoute) { }
 
   user: any;
   name: string = '';
@@ -45,7 +45,7 @@ export class MainPageComponent implements OnInit {
     this.name = this.user.username;
   }
 
-  
+
   onLogout(){
     this.authservice.logout();
     localStorage.removeItem('user');

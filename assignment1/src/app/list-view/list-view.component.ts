@@ -1,5 +1,5 @@
 import { ThrowStmt } from "@angular/compiler";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NzModalRef, NzModalService } from "ng-zorro-antd";
 import { EmployeeFormComponent } from "../employee-form/employee-form.component";
@@ -11,13 +11,16 @@ import { ApiService } from "../shared/api.service";
   templateUrl: "./list-view.component.html",
   styleUrls: ["./list-view.component.scss"],
 })
-export class ListViewComponent implements OnInit {
+export class ListViewComponent implements OnInit, OnDestroy {
   employeeObj: employeeModel = new employeeModel();
 
-  employeDetails!: employeeModel;
+  employeDetails!: employeeModel[];
   validateForm: FormGroup;
 
-  radioValue = "";
+  employee_details: any;
+  employee_delete: any;
+  employee_update: any;
+
   options = [
     { label: "Male", value: "Male" },
     { label: "Female", value: "Female" },
@@ -29,7 +32,6 @@ export class ListViewComponent implements OnInit {
 
   pageIndex = 1;
   pageSize = 3;
-  // total = 500;
 
   constructor(
     private api: ApiService,
@@ -57,7 +59,7 @@ export class ListViewComponent implements OnInit {
       const id = this.validateForm.value.id;
       this.employeeObj = this.validateForm.value;
 
-      this.api.updateEmployee(this.employeeObj, id).subscribe(
+      this.employee_update = this.api.updateEmployee(this.employeeObj, id).subscribe(
         (res: any) => {
           alert("Employee details updated successfully!");
           this.isVisible = false;
@@ -75,7 +77,7 @@ export class ListViewComponent implements OnInit {
         }
       });
     }
-    this.validateForm.reset;
+    this.validateForm.reset();
   }
 
   // to format the date according to MM/DD/YYYY
@@ -92,24 +94,23 @@ export class ListViewComponent implements OnInit {
 
   // to get all the employee details
   getAllEmployeeDetails() {
-    this.api.getEmployee().subscribe((res) => {
+    this.employee_details = this.api.getEmployee().subscribe((res) => {
       this.employeDetails = res;
-      for (var index in this.employeDetails) {
-        let day = this.format(this.employeDetails[index].doj);
-        this.employeDetails[index].doj = day;
+      for (let index in this.employeDetails) {
+        this.employeDetails[index].doj = this.format(this.employeDetails[index].doj);
       }
     });
   }
 
   // to delete the employee details
   deleteEmployee(row: any) {
-    this.api.deleteEmployee(row.id).subscribe((res) => {
+    this.employee_delete = this.api.deleteEmployee(row.id).subscribe((res) => {
       alert("Employee deleted!");
       this.getAllEmployeeDetails();
     });
   }
 
-  // to show edit form in modal and also prepulate the form
+  // to show edit form in modal and also prepopulate the form
   showModal(data: any): void {
     this.isVisible = true;
     nzCancelText: null;
@@ -119,11 +120,15 @@ export class ListViewComponent implements OnInit {
     });
   }
 
-  handleOk(): void {
-    this.isVisible = false;
-  }
 
   handleCancel(): void {
     this.isVisible = false;
+  }
+
+  // to unsubscribe
+  ngOnDestroy(): void {
+    // this.employee_update.unsubscribe();
+    // this.employee_details.unsubscribe();
+    // this.employee_delete.unsubscribe();
   }
 }
