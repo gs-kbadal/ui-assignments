@@ -15,7 +15,6 @@ export class CardViewComponent implements OnInit {
   employeDetails!: employeeModel;
   validateForm: FormGroup;
 
-  radioValue = "";
   options = [
     { label: "Male", value: "Male" },
     { label: "Female", value: "Female" },
