@@ -26,10 +26,8 @@ export class RegistrationFormComponent implements OnInit {
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-      // uname: [null, [Validators.required]],
       uemail: [null, [Validators.email, Validators.required]],
-      password: [null, [Validators.required]],
-      agree: [false], // Todo: why not using agree ?
+      password: [null, [Validators.required]]
     });
   }
 
@@ -54,7 +52,7 @@ export class RegistrationFormComponent implements OnInit {
               this.validateForm.reset();
             },
             (error: any) => {
-              console.log(error); // Todo: Should show some error in error state where ever you log error
+              console.log(error);
             }
           );
           this.router.navigate(["login"]);
@@ -69,8 +67,5 @@ export class RegistrationFormComponent implements OnInit {
       });
     }
   }
-  // Todo: Remove unused code across the project
-  log(value: object[]): void {
-    console.log(value);
-  }
+
 }
