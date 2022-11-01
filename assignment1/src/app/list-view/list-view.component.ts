@@ -1,5 +1,5 @@
 import { ThrowStmt } from "@angular/compiler";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NzModalRef, NzModalService } from "ng-zorro-antd";
 import { EmployeeFormComponent } from "../employee-form/employee-form.component";
@@ -11,13 +11,16 @@ import { ApiService } from "../shared/api.service";
   templateUrl: "./list-view.component.html",
   styleUrls: ["./list-view.component.scss"],
 })
-export class ListViewComponent implements OnInit {
+export class ListViewComponent implements OnInit, OnDestroy {
   employeeObj: employeeModel = new employeeModel();
 
-  employeDetails!: employeeModel; // Todo: Type should be array ex: employeeModel[]
+  employeDetails!: employeeModel[];
   validateForm: FormGroup;
 
-  radioValue = ""; // Todo: remove unused variables in all the components
+  employee_details: any;
+  employee_delete: any;
+  employee_update: any;
+
   options = [
     { label: "Male", value: "Male" },
     { label: "Female", value: "Female" },
@@ -29,7 +32,6 @@ export class ListViewComponent implements OnInit {
 
   pageIndex = 1;
   pageSize = 3;
-  // total = 500; // Todo: remove commented code in all the components
 
   constructor(
     private api: ApiService,
@@ -57,7 +59,7 @@ export class ListViewComponent implements OnInit {
       const id = this.validateForm.value.id;
       this.employeeObj = this.validateForm.value;
 
-      this.api.updateEmployee(this.employeeObj, id).subscribe(
+      this.employee_update = this.api.updateEmployee(this.employeeObj, id).subscribe(
         (res: any) => {
           alert("Employee details updated successfully!");
           this.isVisible = false;
@@ -75,11 +77,11 @@ export class ListViewComponent implements OnInit {
         }
       });
     }
-    this.validateForm.reset; // Todo: reset is a method should use braces () in all the components
+    this.validateForm.reset();
   }
 
   // to format the date according to MM/DD/YYYY
-  format(inputDate: any) { // Todo: Use inbuilt angular date pipe
+  format(inputDate: any) {
     let date: any, month: any, year: any;
     const day = inputDate.slice(0, 10);
 
@@ -92,38 +94,41 @@ export class ListViewComponent implements OnInit {
 
   // to get all the employee details
   getAllEmployeeDetails() {
-    this.api.getEmployee().subscribe((res) => {
+    this.employee_details = this.api.getEmployee().subscribe((res) => {
       this.employeDetails = res;
-      for (var index in this.employeDetails) { // Todo: should not use var
-        let day = this.format(this.employeDetails[index].doj); //Todo: can be removed day variable
-        this.employeDetails[index].doj = day;
+      for (let index in this.employeDetails) {
+        this.employeDetails[index].doj = this.format(this.employeDetails[index].doj);
       }
     });
   }
 
   // to delete the employee details
   deleteEmployee(row: any) {
-    this.api.deleteEmployee(row.id).subscribe((res) => {
+    this.employee_delete = this.api.deleteEmployee(row.id).subscribe((res) => {
       alert("Employee deleted!");
       this.getAllEmployeeDetails();
     });
   }
 
-  // to show edit form in modal and also prepulate the form
+  // to show edit form in modal and also prepopulate the form
   showModal(data: any): void {
     this.isVisible = true;
-    nzCancelText: null; // Todo: we have to handle buttons using cancel and okText
+    nzCancelText: null;
     nzOkText: null;
     this.api.getSingleEmployee(data.id).subscribe((res) => {
       this.validateForm.setValue(res);
     });
   }
 
-  handleOk(): void { // Todo: Remove unused code
-    this.isVisible = false;
-  }
 
   handleCancel(): void {
     this.isVisible = false;
+  }
+
+  // to unsubscribe
+  ngOnDestroy(): void {
+    // this.employee_update.unsubscribe();
+    // this.employee_details.unsubscribe();
+    // this.employee_delete.unsubscribe();
   }
 }
