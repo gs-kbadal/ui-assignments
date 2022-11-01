@@ -1,29 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Route } from '@angular/router';
-import { NzModalRef } from 'ng-zorro-antd';
-import { ApiService } from '../shared/api.service';
-import { employeeModel } from './employee-form.model';
-
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import { Route, Router } from "@angular/router";
+import { NzModalRef } from "ng-zorro-antd";
+import { ApiService } from "../shared/api.service";
+import { employeeModel } from "./employee-form.model";
 
 @Component({
-  selector: 'app-employee-form',
-  templateUrl: './employee-form.component.html',
-  styleUrls: ['./employee-form.component.scss']
+  selector: "app-employee-form",
+  templateUrl: "./employee-form.component.html",
+  styleUrls: ["./employee-form.component.scss"],
 })
-export class EmployeeFormComponent implements OnInit {
-
+export class EmployeeFormComponent implements OnInit, OnDestroy {
   validateForm!: FormGroup;
 
-  employeeObj : employeeModel = new employeeModel();
+  employeeObj: employeeModel = new employeeModel();
   employeDetails: any;
-  radioValue = '';
+  employee_post: any;
+  employee_details: any;
+
   options = [
-    { label: 'Male', value: 'Male' },
-    { label: 'Female', value: 'Female' }
+    { label: "Male", value: "Male" },
+    { label: "Female", value: "Female" },
   ];
 
-  constructor(private fb: FormBuilder, private modal: NzModalRef, private api: ApiService) { }
+  constructor(
+    private fb: FormBuilder,
+    private modal: NzModalRef,
+    private api: ApiService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.validateForm = this.fb.group({
@@ -32,55 +42,46 @@ export class EmployeeFormComponent implements OnInit {
       companyId: [null, [Validators.required]],
       gender: [null, [Validators.required]],
       doj: [null, [Validators.required]],
-      department : [null, [Validators.required]],
+      department: [null, [Validators.required]],
     });
   }
 
   // to submit the emoloyee details in database
   submitForm(): void {
     if (this.validateForm.valid) {
-  // Todo: use directly this.employeeObj = this.validateForm
-    this.employeeObj.name = this.validateForm.value.name;
-    this.employeeObj.email = this.validateForm.value.email;
-    this.employeeObj.companyId = this.validateForm.value.companyId;
-    this.employeeObj.gender = this.validateForm.value.gender;
-    this.employeeObj.doj = this.validateForm.value.doj;
-    this.employeeObj.department = this.validateForm.value.department;
+      this.employeeObj = this.validateForm.value;
 
-    this.api.postEmployee(this.employeeObj).subscribe((res: any) => {
-      alert('Employee details added successfully!');
-      this.modal.destroy();
-      this.validateForm.reset();
-      this.getAllEmployeeDetails();
-    },(error: any)=>{
-      console.log(error);
-    })
-      console.log('submit', this.validateForm.value); // Todo: Remove console logs in all the places
+      this.employee_post = this.api.postEmployee(this.employeeObj).subscribe(
+        (res: any) => {
+          alert("Employee details added successfully!");
+          this.modal.destroy();
+          this.validateForm.reset();
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
     } else {
-      Object.values(this.validateForm.controls).forEach(control => {
+      Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
         }
       });
     }
-    this.validateForm.reset;
-  }
-
-  log(value: object[]): void { //Todo: unused code remove
-    console.log(value);
-  }
-
-  // to destroy the modal created
-  destroyModal(): void { //Todo: unused code remove
-    this.modal.destroy();
+    this.validateForm.reset();
   }
 
   // to get all the employee details
-  getAllEmployeeDetails(){
-    this.api.getEmployee().subscribe(res=>{
+  getAllEmployeeDetails() {
+    this.employee_details = this.api.getEmployee().subscribe((res) => {
       this.employeDetails = res;
-    })
+    });
+  }
+
+  ngOnDestroy(): void {
+    // this.employee_details.unsubscribe();
+    // this.employee_post.unsubscribe();
   }
 
 }
