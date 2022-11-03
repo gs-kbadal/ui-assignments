@@ -115,7 +115,6 @@ export class CardViewComponent implements OnInit, OnDestroy {
     this.subscriptionArray.push(this.api.deleteEmployee(this.deleteId).subscribe((res) => {
       this.getAllEmployeeDetails();
     }))
-    
   }
 
   handleCancel(): void {

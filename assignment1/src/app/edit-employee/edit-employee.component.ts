@@ -9,6 +9,7 @@ import { Route, Router } from "@angular/router";
 import { NzModalRef, NzNotificationService } from "ng-zorro-antd";
 import { ApiService } from "../shared/api.service";
 import { EmployeeModel } from "../employee-form/employee-form.model";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-edit-employee',
@@ -24,6 +25,8 @@ export class EditEmployeeComponent implements OnInit, OnDestroy {
   employeDetails: any;
   employee_post: any;
   employee_details: any;
+  subscriptionArray: Subscription[] = [];
+
 
   options = [
     { label: "Male", value: "Male" },
@@ -49,47 +52,26 @@ export class EditEmployeeComponent implements OnInit, OnDestroy {
       department: [null, [Validators.required]],
     });
 
-    this.api.getSingleEmployee(this.element).subscribe((res) => {
+    this.subscriptionArray.push(this.api.getSingleEmployee(this.element).subscribe((res) => {
       this.validateForm.setValue(res);
-    });
+    }))
   }
-
-  // to submit the emoloyee details in database
-  // submitForm(): void {
-  //   if (this.validateForm.valid) {
-  //     this.employeeObj = this.validateForm.value;
-
-  //     this.employee_post = this.api.postEmployee(this.employeeObj).subscribe(
-  //       (res: any) => {
-  //         alert("Employee details added successfully!");
-  //         // this.modal.destroy();
-  //         this.validateForm.reset();
-  //       },
-  //       (error: any) => {
-  //         console.log(error);
-  //       }
-  //     );
-  //   } else {
-  //     Object.values(this.validateForm.controls).forEach((control) => {
-  //       if (control.invalid) {
-  //         control.markAsDirty();
-  //         control.updateValueAndValidity({ onlySelf: true });
-  //       }
-  //     });
-  //   }
-  //   this.validateForm.reset();
-  // }
 
   // to get all the employee details
   getAllEmployeeDetails() {
-    this.employee_details = this.api.getEmployee().subscribe((res) => {
+    this.subscriptionArray.push(this.api.getEmployee().subscribe((res) => {
       this.employeDetails = res;
-    });
+    }))
   }
 
   ngOnDestroy(): void {
-    // this.employee_details.unsubscribe();
-    // this.employee_post.unsubscribe();
+    if (this.subscriptionArray && this.subscriptionArray.length) {
+      this.subscriptionArray.forEach((subs: Subscription) => {
+        if (subs) {
+          subs.unsubscribe();
+        }
+      });
+    }
   }
 
   updateForm(): void {
@@ -97,9 +79,8 @@ export class EditEmployeeComponent implements OnInit, OnDestroy {
       const id = this.validateForm.value.id;
       this.employeeObj = this.validateForm.value;
 
-      this.api.updateEmployee(this.employeeObj, id).subscribe(
+      this.subscriptionArray.push(this.api.updateEmployee(this.employeeObj, id).subscribe(
         (res: any) => {
-          // alert("Employee details updated successfully!");
           this.createNotification('success','Update', 'Employee details updated successfully')
           this.getAllEmployeeDetails();
           this.router.navigate(["home","listview"]);
@@ -107,7 +88,7 @@ export class EditEmployeeComponent implements OnInit, OnDestroy {
         (error: any) => {
           console.log(error);
         }
-      );
+      ))
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {

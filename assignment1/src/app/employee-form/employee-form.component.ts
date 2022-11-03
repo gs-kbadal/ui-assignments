@@ -26,7 +26,6 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
   employee_details: any;
   subscriptionArray: Subscription[] = [];
 
-
   options = [
     { label: "Male", value: "Male" },
     { label: "Female", value: "Female" },
@@ -59,7 +58,11 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
 
       this.employee_post = this.api.postEmployee(this.employeeObj).subscribe(
         (res: any) => {
-          this.createNotification('success','Added', 'Employee details added successfully');
+          this.createNotification(
+            "success",
+            "Added",
+            "Employee details added successfully"
+          );
           this.validateForm.reset();
         },
         (error: any) => {
@@ -79,17 +82,15 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
 
   // to get all the employee details
   getAllEmployeeDetails() {
-    this.subscriptionArray.push(this.api.getEmployee().subscribe((res) => {
-      this.employeDetails = res;
-    }))
+    this.subscriptionArray.push(
+      this.api.getEmployee().subscribe((res) => {
+        this.employeDetails = res;
+      })
+    );
   }
 
   createNotification(type: string, title: string, message: string): void {
-    this.notification.create(
-      type,
-      title,
-      message
-    );
+    this.notification.create(type, title, message);
   }
 
   ngOnDestroy(): void {
@@ -101,5 +102,4 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
       });
     }
   }
-
 }
