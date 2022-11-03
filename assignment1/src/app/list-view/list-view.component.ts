@@ -3,8 +3,11 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NzModalRef, NzModalService } from "ng-zorro-antd";
 import { EmployeeFormComponent } from "../employee-form/employee-form.component";
-import { employeeModel } from "../employee-form/employee-form.model";
+import { EmployeeModel } from "../employee-form/employee-form.model";
 import { ApiService } from "../shared/api.service";
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { Subscription } from "rxjs";
+
 
 @Component({
   selector: "app-list-view",
@@ -12,10 +15,11 @@ import { ApiService } from "../shared/api.service";
   styleUrls: ["./list-view.component.scss"],
 })
 export class ListViewComponent implements OnInit, OnDestroy {
-  employeeObj: employeeModel = new employeeModel();
+  employeeObj: EmployeeModel = new EmployeeModel();
 
-  employeDetails!: employeeModel[];
+  employeDetails!: EmployeeModel[]; // Todo: Type should be array ex: employeeModel[] - DONE
   validateForm: FormGroup;
+  subscriptionArray: Subscription[] = [];
 
   employee_details: any;
   employee_delete: any;
@@ -26,6 +30,8 @@ export class ListViewComponent implements OnInit, OnDestroy {
     { label: "Female", value: "Female" },
   ];
 
+  dataId: Number;
+  visible = false;
   isVisible = false;
   isCancel = null;
   isOk = null;
@@ -33,15 +39,20 @@ export class ListViewComponent implements OnInit, OnDestroy {
   pageIndex = 1;
   pageSize = 3;
 
+  deleteId: number;
+  deleteConfirm = false;
+  isDeleteModalOpen = false;
+
   constructor(
     private api: ApiService,
     private modalService: NzModalService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private notification: NzNotificationService
   ) {}
 
   ngOnInit() {
     this.getAllEmployeeDetails();
-
+    
     this.validateForm = this.fb.group({
       id: [null],
       name: [null, [Validators.required]],
@@ -51,6 +62,17 @@ export class ListViewComponent implements OnInit, OnDestroy {
       doj: [null, [Validators.required]],
       department: [null, [Validators.required]],
     });
+    console.log(this.visible);
+  }
+
+  open(id:number): void {
+    this.visible = true;
+    this.dataId = id;
+    console.log(this.visible);
+  }
+
+  close(): void {
+    this.visible = false;
   }
 
   // to update the employee details
@@ -59,16 +81,16 @@ export class ListViewComponent implements OnInit, OnDestroy {
       const id = this.validateForm.value.id;
       this.employeeObj = this.validateForm.value;
 
-      this.employee_update = this.api.updateEmployee(this.employeeObj, id).subscribe(
+      this.subscriptionArray.push(this.api.updateEmployee(this.employeeObj, id).subscribe(
         (res: any) => {
-          alert("Employee details updated successfully!");
+          // this.createNotification('success','Update', 'Employee details updated successfully')
           this.isVisible = false;
           this.getAllEmployeeDetails();
         },
         (error: any) => {
           console.log(error);
         }
-      );
+      ))
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -77,37 +99,28 @@ export class ListViewComponent implements OnInit, OnDestroy {
         }
       });
     }
-    this.validateForm.reset();
-  }
-
-  // to format the date according to MM/DD/YYYY
-  format(inputDate: any) {
-    let date: any, month: any, year: any;
-    const day = inputDate.slice(0, 10);
-
-    year = day.slice(0, 4);
-    month = day.slice(5, 7);
-    date = day.slice(8, 10);
-
-    return `${month}/${date}/${year}`;
+    this.validateForm.reset(); // Todo: reset is a method should use braces () in all the components- DONE
   }
 
   // to get all the employee details
   getAllEmployeeDetails() {
-    this.employee_details = this.api.getEmployee().subscribe((res) => {
+    this.subscriptionArray.push(this.api.getEmployee().subscribe((res) => {
       this.employeDetails = res;
-      for (let index in this.employeDetails) {
-        this.employeDetails[index].doj = this.format(this.employeDetails[index].doj);
-      }
-    });
+    }))
   }
 
-  // to delete the employee details
   deleteEmployee(row: any) {
-    this.employee_delete = this.api.deleteEmployee(row.id).subscribe((res) => {
-      alert("Employee deleted!");
+    this.isDeleteModalOpen = true;
+    this.deleteId = row.id;
+  }
+
+
+  handleDelete(){
+    this.isDeleteModalOpen = false;
+    this.subscriptionArray.push(this.api.deleteEmployee(this.deleteId).subscribe((res) => {
       this.getAllEmployeeDetails();
-    });
+    }))
+    
   }
 
   // to show edit form in modal and also prepopulate the form
@@ -115,20 +128,34 @@ export class ListViewComponent implements OnInit, OnDestroy {
     this.isVisible = true;
     nzCancelText: null;
     nzOkText: null;
-    this.api.getSingleEmployee(data.id).subscribe((res) => {
+    this.subscriptionArray.push(this.api.getSingleEmployee(data.id).subscribe((res) => {
       this.validateForm.setValue(res);
-    });
+    }))
   }
 
 
   handleCancel(): void {
     this.isVisible = false;
+    this.isDeleteModalOpen = false;
   }
 
   // to unsubscribe
   ngOnDestroy(): void {
-    // this.employee_update.unsubscribe();
-    // this.employee_details.unsubscribe();
-    // this.employee_delete.unsubscribe();
+    if (this.subscriptionArray && this.subscriptionArray.length) {
+      this.subscriptionArray.forEach((subs: Subscription) => {
+        if (subs) {
+          subs.unsubscribe();
+        }
+      });
+    }
   }
+
+  createNotification(type: string, title: string, message: string): void {
+    this.notification.create(
+      type,
+      title,
+      message
+    );
+  }
+
 }

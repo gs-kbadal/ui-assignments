@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import {
   FormBuilder,
   FormControl,
@@ -6,9 +6,10 @@ import {
   Validators,
 } from "@angular/forms";
 import { Route, Router } from "@angular/router";
-import { NzModalRef } from "ng-zorro-antd";
+import { NzModalRef, NzNotificationService } from "ng-zorro-antd";
+import { Subscription } from "rxjs";
 import { ApiService } from "../shared/api.service";
-import { employeeModel } from "./employee-form.model";
+import { EmployeeModel } from "./employee-form.model";
 
 @Component({
   selector: "app-employee-form",
@@ -17,11 +18,14 @@ import { employeeModel } from "./employee-form.model";
 })
 export class EmployeeFormComponent implements OnInit, OnDestroy {
   validateForm!: FormGroup;
+  @Input() element: number;
 
-  employeeObj: employeeModel = new employeeModel();
+  employeeObj: EmployeeModel = new EmployeeModel();
   employeDetails: any;
   employee_post: any;
   employee_details: any;
+  subscriptionArray: Subscription[] = [];
+
 
   options = [
     { label: "Male", value: "Male" },
@@ -30,13 +34,14 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private modal: NzModalRef,
     private api: ApiService,
-    private router: Router
+    private router: Router,
+    private notification: NzNotificationService
   ) {}
 
   ngOnInit() {
     this.validateForm = this.fb.group({
+      id: [null],
       name: [null, [Validators.required]],
       email: [null, [Validators.email, Validators.required]],
       companyId: [null, [Validators.required]],
@@ -49,12 +54,12 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
   // to submit the emoloyee details in database
   submitForm(): void {
     if (this.validateForm.valid) {
+      // Todo: use directly this.employeeObj = this.validateForm - DONE
       this.employeeObj = this.validateForm.value;
 
       this.employee_post = this.api.postEmployee(this.employeeObj).subscribe(
         (res: any) => {
-          alert("Employee details added successfully!");
-          this.modal.destroy();
+          this.createNotification('success','Added', 'Employee details added successfully');
           this.validateForm.reset();
         },
         (error: any) => {
@@ -74,14 +79,27 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
 
   // to get all the employee details
   getAllEmployeeDetails() {
-    this.employee_details = this.api.getEmployee().subscribe((res) => {
+    this.subscriptionArray.push(this.api.getEmployee().subscribe((res) => {
       this.employeDetails = res;
-    });
+    }))
+  }
+
+  createNotification(type: string, title: string, message: string): void {
+    this.notification.create(
+      type,
+      title,
+      message
+    );
   }
 
   ngOnDestroy(): void {
-    // this.employee_details.unsubscribe();
-    // this.employee_post.unsubscribe();
+    if (this.subscriptionArray && this.subscriptionArray.length) {
+      this.subscriptionArray.forEach((subs: Subscription) => {
+        if (subs) {
+          subs.unsubscribe();
+        }
+      });
+    }
   }
 
 }

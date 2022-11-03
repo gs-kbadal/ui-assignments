@@ -1,7 +1,9 @@
+import { ThrowStmt } from "@angular/compiler";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NzModalService } from "ng-zorro-antd";
-import { employeeModel } from "../employee-form/employee-form.model";
+import { Subscription } from "rxjs";
+import { EmployeeModel } from "../employee-form/employee-form.model";
 import { ApiService } from "../shared/api.service";
 
 @Component({
@@ -10,22 +12,32 @@ import { ApiService } from "../shared/api.service";
   styleUrls: ["./card-view.component.scss"],
 })
 export class CardViewComponent implements OnInit, OnDestroy {
-  employeeObj: employeeModel = new employeeModel();
+  employeeObj: EmployeeModel = new EmployeeModel();
 
-  employeDetails!: employeeModel;
+  employeDetails!: EmployeeModel;
   validateForm: FormGroup;
   employee_details: any;
   employee_delete: any;
   employee_update: any;
+  subscriptionArray: Subscription[] = [];
+
+
+  deleteId: number;
+  deleteConfirm = false;
+  isDeleteModalOpen = false;
 
   options = [
     { label: "Male", value: "Male" },
     { label: "Female", value: "Female" },
   ];
 
+  dataId: Number;
+  visible = false;
+
   isVisible = false;
   isCancel = null;
   isOk = null;
+  
 
   constructor(
     private api: ApiService,
@@ -47,13 +59,23 @@ export class CardViewComponent implements OnInit, OnDestroy {
     });
   }
 
+  open(id:number): void {
+    this.visible = true;
+    this.dataId = id;
+    console.log(this.visible);
+  }
+
+  close(): void {
+    this.visible = false;
+  }
+
   // to update the employee details
   updateForm(): void {
     if (this.validateForm.valid) {
       const id = this.validateForm.value.id;
       this.employeeObj = this.validateForm.value;
 
-      this.employee_update = this.api.updateEmployee(this.employeeObj, id).subscribe(
+      this.subscriptionArray.push(this.api.updateEmployee(this.employeeObj, id).subscribe(
         (res: any) => {
           alert("Employee details updated successfully!");
           this.isVisible = false;
@@ -62,7 +84,7 @@ export class CardViewComponent implements OnInit, OnDestroy {
         (error: any) => {
           console.log(error);
         }
-      );
+      ))
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -74,62 +96,43 @@ export class CardViewComponent implements OnInit, OnDestroy {
     this.validateForm.reset;
   }
 
-  // to format the date according to MM/DD/YYYY
-  format(inputDate: any) {
-    let date: any, month: any, year: any;
-    const day = inputDate.slice(0, 10);
-    year = day.slice(0, 4);
-    month = day.slice(5, 7);
-    date = day.slice(8, 10);
-    let dd = parseInt(date);
-    if (dd === 32) {
-      dd = 31;
-    }
-    date = dd;
-
-    return `${month}/${date}/${year}`;
-  }
-
   // to get all the employee details
   getAllEmployeeDetails() {
-    this.employee_details = this.api.getEmployee().subscribe((res) => {
+    this.subscriptionArray.push(this.api.getEmployee().subscribe((res) => {
       this.employeDetails = res;
-      for (var index in this.employeDetails) {
-        let day = this.format(this.employeDetails[index].doj);
-        this.employeDetails[index].doj = day;
-      }
-    });
+    }))
   }
 
   // to delete the employee details
   deleteEmployee(row: any) {
-    this.employee_delete = this.api.deleteEmployee(row.id).subscribe((res) => {
-      alert("Employee deleted!");
+    this.isDeleteModalOpen = true;
+    this.deleteId = row.id;
+  }
+
+
+  handleDelete(){
+    this.isDeleteModalOpen = false;
+    this.subscriptionArray.push(this.api.deleteEmployee(this.deleteId).subscribe((res) => {
       this.getAllEmployeeDetails();
-    });
-  }
-
-  // to open the employee form in modal for edit purpose and prepopulate the form
-  showModal(data: any): void {
-    this.isVisible = true;
-    nzCancelText: null;
-    nzOkText: null;
-    this.api.getSingleEmployee(data.id).subscribe((res) => {
-      this.validateForm.setValue(res);
-    });
-  }
-
-  handleOk(): void {
-    this.isVisible = false;
+    }))
+    
   }
 
   handleCancel(): void {
     this.isVisible = false;
+    this.isDeleteModalOpen = false;
   }
 
+
   ngOnDestroy(): void {
-    // this.employee_details.unsubscribe();
-    // this.employee_update.unsubscribe();
-    // this.employee_delete.unsubscribe();
+    if (this.subscriptionArray && this.subscriptionArray.length) {
+      this.subscriptionArray.forEach((subs: Subscription) => {
+        if (subs) {
+          subs.unsubscribe();
+        }
+      });
+    }
   }
+
+ 
 }

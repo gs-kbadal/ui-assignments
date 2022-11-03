@@ -15,6 +15,7 @@
 
   .row {
     display: flex;
+    justify-content: space-between;
   }
 
   .nav1 {
@@ -22,8 +23,9 @@
   }
 
   .nav2 {
-    flex: 40%;
+    flex: 60%;
     display: flex;
+    justify-content: flex-end;
   }
 
   .profile{
@@ -33,9 +35,16 @@
   }
 
   .logout{
-    height: 50px;
-    width: 200px;
     align-items: flex-end;
+    align-items: center;
+    margin-right: 80px;
+    font-size: 20px;
+  }
+
+  .name {
+    align-items: flex-end;
+    align-items: center;
+    margin-right: 50px;
   }
 
 
@@ -55,10 +64,10 @@
     justify-content: flex-end;
   }
 
-  .col2{
-    flex: 50%;
-    color: white;
-  }
+  // .col2{
+  //   flex: 50%;
+  //   color: white;
+  // }
 
   .col1 {
     height: 50px;
@@ -68,6 +77,7 @@
 
   nz-footer {
     text-align: center;
+    max-height: 50px;
   }
 
   .logo {
@@ -77,4 +87,14 @@
   .view{
     margin: 2px 2px 2px 2px;
     width: 1100px;
+  }
+
+  // .active{
+  //   background-color: blue;
+  //   color: white;
+  // }
+
+  .active {
+    background-color: #666;
+    color: white;
   }

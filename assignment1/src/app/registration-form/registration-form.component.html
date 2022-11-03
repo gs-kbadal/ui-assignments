@@ -4,23 +4,23 @@
       <h2>Create a new account</h2>
       
       <nz-form-item>
-        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="uemail">Username</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Invalid Username!">
+        <nz-form-label nzRequired nzFor="uemail">Username</nz-form-label><br>
+        <nz-form-control [nzSm]="25" [nzXs]="24" nzErrorTip="Invalid Username!">
           <input nz-input formControlName="uemail" id="uemail" placeholder="Username" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSpan]="8" nzRequired nzFor="password">Password</nz-form-label>
-        <nz-form-control [nzSpan]="14" nzErrorTip="Enter Password">
+        <nz-form-label nzRequired nzFor="password">Password</nz-form-label><br>
+        <nz-form-control [nzSpan]="25" nzErrorTip="Enter Password">
           <input nz-input type="password" formControlName="password" placeholder="password" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item nz-row class="register-area">
-        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <nz-form-control [nzSpan]="14" [nzOffset]="1">
           <button nz-button nzType="primary">SignUp</button><br>
-          <a routerLink="/login"><strong>Already a member</strong></a>
+          <a routerLink="/login"><strong>Login</strong></a>
         </nz-form-control>
       </nz-form-item>
     </form>

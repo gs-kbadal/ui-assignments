@@ -1,4 +1,4 @@
-export class employeeModel {
+export class EmployeeModel {
     name: string = '';
     email: string = '';
     companyId: string = '';

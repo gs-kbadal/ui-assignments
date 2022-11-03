@@ -9,7 +9,6 @@ import { ListViewComponent } from './list-view/list-view.component';
 import { LoginAuthService } from './login-auth.service';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { MainPageComponent } from './main-page/main-page.component';
-import { MockComponentComponent } from './mock-component/mock-component.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 
 // canActivate: [AuthGuardService] LoginAuthService
@@ -21,7 +20,6 @@ const routes: Routes = [
   ]},
   {path: 'login', canActivate: [LoginAuthService],  component: LoginFormComponent},
   {path: 'employee', component: EmployeeFormComponent},
-  {path: 'mock/:id', component: MockComponentComponent},
 ];
 
 @NgModule({

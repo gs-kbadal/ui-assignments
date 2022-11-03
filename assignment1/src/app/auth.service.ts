@@ -27,11 +27,17 @@ export class AuthService {
     return promise;
   }
 
-  login() {
+  login(userState: any) {
     this.loggedIn = true;
+    localStorage.setItem('user', JSON.stringify(userState));
   }
 
   logout() {
     this.loggedIn = false;
+  }
+
+  getUserName(){
+    const local_user = JSON.parse(localStorage.getItem("user"));
+    return local_user;
   }
 }
