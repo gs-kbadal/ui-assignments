@@ -1,5 +1,7 @@
 <div class="login_form_container">
   <div class="login_form_container_body">
+<div class="row"> <!--Should not use bootstarp classes in all the components   -->
+  <div class="col">
     <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
       <h2>Log in to Gainsight</h2>
       <nz-form-item>

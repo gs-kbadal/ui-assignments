@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { AuthService } from '../auth.service';
@@ -13,6 +13,9 @@ export class MainPageComponent implements OnInit {
 
   isVisibleTop = false;
   isVisibleMiddle = false;
+
+  fieldPropertyChanged: boolean = true;
+  fieldChanged : boolean = true;
 
   showModalTop(): void {
     this.isVisibleTop = true;
@@ -30,6 +33,12 @@ export class MainPageComponent implements OnInit {
       nzCancelText: null,
       nzOkText:null,
     });
+  }
+
+  @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
+    if (this.fieldPropertyChanged || this.fieldChanged) {
+      event.returnValue = true;
+    }
   }
 
   constructor(private modalService: NzModalService,

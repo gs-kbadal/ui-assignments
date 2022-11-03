@@ -14,7 +14,10 @@
     width: 100%;
   }
 
-  .login_form_container {
+
+  // TODO: Should not use bootstarp styles in all the components, write your styles or use nz-zorro
+  .row {
+
     display: flex;
     height: 800px;
     background-color: #f0f2f5;

@@ -17,7 +17,7 @@
 <div class="has-text-centered">
   <pagination-controls (pageChange)="page = $event"></pagination-controls>
 </div>
-
+<!-- Reuse employee form component instead reusing the code -->
 <nz-modal [(nzVisible)]="isVisible" nzTitle="Employee Details" [(nzCancelText)]="isCancel" [(nzOkText)]="isOk"
   (nzOnCancel)="handleCancel()">
   <div>
