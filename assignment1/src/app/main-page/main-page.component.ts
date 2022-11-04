@@ -65,7 +65,7 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.authservice.getUserName();
-    this.name = this.user.username;
+    this.name = this.user.name;
   }
 
   onLogout() {

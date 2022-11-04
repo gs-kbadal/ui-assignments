@@ -40,41 +40,48 @@
   "users": [
     {
       "id": 1,
+      "name": "admin",
       "username": "admin@gainsight.com",
       "password": "admin@123",
       "role": "ADMIN"
     },
     {
+      "name": "kumar Badal",
       "username": "kbadal@gainsight.com",
       "password": "badal@123",
       "role": "user",
       "id": 2
     },
     {
+      "name": "kumar Badal",
       "username": "kumar@gmail.com",
       "password": "kumar@123",
       "role": "user",
       "id": 3
     },
     {
+      "name": "swapnil",
       "username": "swapnil@g.com",
       "password": "badal@123",
       "role": "user",
       "id": 4
     },
     {
+      "name": "ayush",
       "username": "ayush@gmail.com",
       "password": "badal@123",
       "role": "user",
       "id": 5
     },
     {
+      "name": "abhishek",
       "username": "abhishek@gmail.com",
       "password": "badal@123",
       "role": "user",
       "id": 6
     },
     {
+      "name": "abhishek",
       "username": "abhishek@gainsight.com",
       "password": "badal@123",
       "role": "user",
