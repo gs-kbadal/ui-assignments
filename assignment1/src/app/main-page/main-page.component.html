@@ -2,14 +2,14 @@
   <nz-sider nzCollapsible [nzCollapsedWidth]="0">
 
     <ul nz-menu nzTheme="dark" nzMode="inline">
-      <a [routerLink]="['/home','listview']" routerLinkActive="active">
-        <li nz-menu-item>
+      <a [routerLink]="['/home','listview']">
+        <li nz-menu-item routerLinkActive="active">
           <span nz-icon nzType="profile" nzTheme="outline"></span>
           <span>List View</span>
         </li>
       </a>
-      <a [routerLink]="['/home','cardview']" class="active">
-        <li nz-menu-item>
+      <a [routerLink]="['/home','cardview']">
+        <li nz-menu-item routerLinkActive="active">
           <span nz-icon nzType="container" nzTheme="outline"></span>
           <span>Card View</span>
         </li>
