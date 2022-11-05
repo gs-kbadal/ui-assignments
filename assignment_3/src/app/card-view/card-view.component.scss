@@ -1,0 +1,40 @@
+a {
+    margin: 5px 5px 5px 5px;
+    background-color: violet;
+    color: white;
+    padding: 8px;
+}
+
+a:hover{
+    background-color: blue;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns:repeat(3, 1fr);
+    justify-content: space-between;
+    width: 100%;
+  }
+
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: left;
+    margin-right: 50px;
+}
+.has-text-centered{
+    padding:2rem;
+}
+
+.card_margin{
+    margin: 10px 10px 10px 10px;
+}
+
+button {
+    background-color: blue;
+    color: white;
+    margin-right: 20px;
+}
+
+span {
+    height: 2rem;
+}

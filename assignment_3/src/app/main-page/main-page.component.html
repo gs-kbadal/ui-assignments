@@ -1,0 +1,62 @@
+<nz-layout class="layout">
+  <nz-sider nzCollapsible [nzCollapsedWidth]="0">
+
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <a [routerLink]="['/home','listview']">
+        <li nz-menu-item routerLinkActive="active">
+          <span nz-icon nzType="profile" nzTheme="outline"></span>
+          <span>List View</span>
+        </li>
+      </a>
+      <a [routerLink]="['/home','cardview']">
+        <li nz-menu-item routerLinkActive="active">
+          <span nz-icon nzType="container" nzTheme="outline"></span>
+          <span>Card View</span>
+        </li>
+      </a>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="row">
+        <div class="nav1">
+          <span class="logo"><strong>Gainsight</strong></span>
+        </div>
+        <div class="nav2">
+          <div class="name">
+            <span><strong>{{name}}</strong></span>
+          </div>
+          <div class="logout">
+            <a (click)="onLogout()"><strong>Logout</strong></a>
+          </div>
+        </div>
+      </div>
+
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <div class="btn">
+          <div class="col1">
+            <button nz-button nzType="primary" (click)="open()">Add Employee</button>
+          </div>
+        </div>
+        <div class="view">
+          <router-outlet></router-outlet>
+        </div>
+
+      </div>
+    </nz-content>
+    <nz-footer>Angular ©2020 Implement By Badal</nz-footer>
+  </nz-layout>
+</nz-layout>
+
+<nz-drawer
+[nzWidth]="500"
+  [nzClosable]="false"
+  [nzVisible]="visible"
+  nzPlacement="right"
+  nzTitle="Employee Form"
+  (nzOnClose)="close()"
+>
+    <app-employee-form [element]="data"></app-employee-form>
+</nz-drawer>

@@ -1,0 +1,95 @@
+.layout {
+    min-height: 100vh;
+  }
+
+  .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+  }
+
+  nz-header {
+    background: #fff;
+    padding: 0;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .nav1 {
+    flex: 20%;
+  }
+
+  .nav2 {
+    flex: 60%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .profile{
+    flex: 50%;
+    align-items: end;
+    justify-content: flex-end;
+  }
+
+  .logout{
+    align-items: flex-end;
+    align-items: center;
+    margin-right: 80px;
+    font-size: 20px;
+  }
+
+  .name {
+    align-items: flex-end;
+    align-items: center;
+    margin-right: 50px;
+  }
+
+
+  nz-content {
+    margin: 24px 16px 0;
+  }
+
+  .inner-content {
+    padding: 10px;
+    background: #fff;
+    min-height: 650px;
+  }
+
+  .btn {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  // .col2{
+  //   flex: 50%;
+  //   color: white;
+  // }
+
+  .col1 {
+    height: 50px;
+    width: 150px;
+    color: white;
+  }
+
+  nz-footer {
+    text-align: center;
+    max-height: 50px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .view{
+    margin: 2px 2px 2px 2px;
+    width: 1100px;
+  }
+
+  .active {
+    background-color: #1690ff;
+    color: white;
+  }
